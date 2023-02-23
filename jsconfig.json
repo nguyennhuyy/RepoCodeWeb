@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"~/views/*": ["./src/views/*"],
+			"~/components/*": ["./src/components/*"],
+			"~/redux/*": ["./src/redux/*"],
+			"~/router/*": ["./src/router/*"],
+			"~/utils/*": ["./src/utils/*"],
+			"~/assets/*": ["./src/assets/*"],
+			"~/hooks/*": ["./src/hooks/*"],
+			"~/helpers/*": ["./src/helpers/*"]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"alias": {
+					"~/redux": "./src/redux",
+					"~/assets": "./src/assets",
+					"~/components": "./src/components",
+					"~/helpers": "./src/helpers",
+					"~/hooks": "./src/hooks",
+					"~/router": "./src/router",
+					"~/views": "./src/views",
+					"~/utils": "./src/utils"
+				}
+			}
+		]
+	]
+}
