@@ -1,9 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import variables from "~/assets/css/root";
-import fonts from "~/assets/fonts/fonts";
 
 const GlobalStyle = createGlobalStyle`
-  ${fonts};
   ${variables};
   html {
     box-sizing: border-box;
@@ -20,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     color: var(--black);
-    font-family: var(--font);
+    font-family: "Poppins, sans-serif";
     font-weight: 400,
     font-size: 1.6rem
   }

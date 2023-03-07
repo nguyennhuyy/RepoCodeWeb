@@ -13,7 +13,9 @@ export const Header = styled.nav({
 });
 export const Left = styled.div({
 	marginRight: "2rem",
-	flex: 1
+	flex: 1,
+	display: "flex",
+	alignItems: "center"
 });
 
 export const Center = styled.div({
@@ -34,7 +36,8 @@ export const BoxItem = styled.div({
 export const Right = styled.div({
 	flex: 1,
 	display: "flex",
-	cursor: "pointer"
+	cursor: "pointer",
+	alignItems: "center"
 });
 export const BoxAuth = styled.div(props => ({
 	padding: "20px 24px",
@@ -47,3 +50,50 @@ export const BoxAuth = styled.div(props => ({
 	borderRadius: 999,
 	cursor: "pointer"
 }));
+
+export const BoxBottom = styled.div({
+	backgroundColor: COLOR.GRAY_2,
+	margin: "auto",
+	width: "100%"
+});
+export const BoxLanguage = styled.button({
+	backgroundColor: COLOR.WHITE_0,
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "center",
+	border: "none",
+	outline: "none",
+	borderRadius: 9999,
+	padding: "10px 24px",
+	cursor: "pointer"
+});
+export const ItemBottom = styled.div({
+	backgroundColor: COLOR.GRAY_2,
+	padding: "4rem 0",
+	maxWidth: "80rem",
+	margin: "auto"
+});
+export const ItemBottomTop = styled.div({
+	display: "flex",
+	justifyContent: "space-between"
+});
+export const ItemLogo = styled.div({
+	display: "flex",
+	alignItems: "center"
+});
+
+export const ListBottom = styled.div({
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center"
+});
+
+export const ItemList = styled.div({
+	marginRight: 24,
+	width: "max-content",
+	cursor: "pointer"
+});
+export const ItemCopyright = styled.div({
+	display: "flex",
+	justifyContent: "space-between"
+});

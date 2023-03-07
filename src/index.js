@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
 import GlobalStyle from "~/components/WebGlobalStyle";
+import GlobalFonts from "~/assets/fonts/fonts";
+
 const storeConfig = configureStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +16,7 @@ root.render(
 			<PersistGate loading={null} persistor={storeConfig.persistor}>
 				<BrowserRouter>
 					<GlobalStyle />
+					<GlobalFonts />
 					<App />
 				</BrowserRouter>
 			</PersistGate>
