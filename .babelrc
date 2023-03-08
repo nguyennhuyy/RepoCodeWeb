@@ -11,7 +11,8 @@
 					"~/hooks": "./src/hooks",
 					"~/router": "./src/router",
 					"~/views": "./src/views",
-					"~/utils": "./src/utils"
+					"~/utils": "./src/utils",
+					"~/layouts": "./src/layouts"
 				}
 			}
 		]
