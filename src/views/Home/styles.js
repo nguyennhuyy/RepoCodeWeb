@@ -56,3 +56,31 @@ export const UrlUpload = styled.div({
 	marginTop: 20,
 	textAlign: "center"
 });
+
+export const WrapperStunning = styled.div({
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+	width: "100%",
+	padding: "96px 0",
+	flexDirection: "column"
+});
+
+export const ListButton = styled.div({
+	display: "flex"
+});
+
+export const BoxSwiper = styled.div({
+	width: "80%",
+	margin: "0 auto",
+	display: "flex",
+	justifyContent: "center",
+	marginTop: "24px",
+	borderRadius: 30,
+	overflow: "hidden"
+});
+export const ImageSwiper = styled.img({
+	width: "100%",
+	height: "100%",
+	objectFit: "contain"
+});
