@@ -9,5 +9,6 @@ export const COLOR = {
 	RBG_3: "rgb(84,97,108)",
 	RGB_4: "rgba(152 ,110, 0 ,1)",
 	RGB_5: "rgba(0 ,0, 0 ,0.1)",
-	BLUE_0: "#0F70E6"
+	BLUE_0: "#0F70E6",
+	RED_0: "#DB2C6F"
 };

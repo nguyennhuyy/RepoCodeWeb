@@ -25,16 +25,14 @@ export default class APIUtils {
 				method: "GET",
 				timeout: REQUEST_TIMEOUT,
 				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-					Accept: "application/json",
-					Authorization: this.accessToken
+					"Content-Type": "application/json",
+					Authorization: `Beaer ${this.accessToken}`
 				}
 			};
 			try {
 				const response = await axios(request);
-				console.log("response", response);
-				const { error_code, error_message } = response.data;
-				if (error_code == 0 && error_message === "success") {
+				const { status } = response;
+				if (status == 200 || status == 201) {
 					return resolve(response.data);
 				} else {
 					return reject(response.data);
@@ -52,17 +50,15 @@ export default class APIUtils {
 				method: "POST",
 				timeout: REQUEST_TIMEOUT,
 				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-					Accept: "application/json",
-					Authorization: this.accessToken
+					"Content-Type": "application/json",
+					Authorization: `Beaer ${this.accessToken}`
 				},
 				data: JSON.stringify(postData)
 			};
 			try {
 				const response = await axios(request);
-				console.log("response", response);
-				const { error_code, error_message } = response.data;
-				if (error_code == 0 && error_message === "success") {
+				const { status } = response;
+				if (status == 200 || status == 201) {
 					return resolve(response.data);
 				} else {
 					return reject(response.data);

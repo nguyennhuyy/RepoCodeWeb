@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import FormGroup from "@mui/material/FormGroup";
@@ -13,11 +14,13 @@ import {
 	CardShadow,
 	DivOr,
 	ItemOr,
-	FormSubmit,
-	TextLink
+	FormSubmit
 } from "./styles";
 import LoginSocial from "../LoginSocial/LoginSocial";
-const LoginScreen = () => {
+import { Formik } from "formik";
+import { LOGIN_FORM_SCHEME } from "~/helpers/validate";
+import WebInput from "~/components/WebInput";
+const LoginScreen = ({ onLogin }) => {
 	return (
 		<Container>
 			<BoxTop>
@@ -53,57 +56,83 @@ const LoginScreen = () => {
 						</WebText>
 						<ItemOr></ItemOr>
 					</DivOr>
-					<FormSubmit>
-						<TextField
-							label='Email'
-							variant='outlined'
-							sx={{
-								width: "100%",
-								marginBottom: "16px"
-							}}
-						/>
-						<TextField
-							label='Password'
-							variant='outlined'
-							sx={{
-								width: "100%",
-								marginBottom: "16px"
-							}}
-						/>
-						<FormGroup>
-							<FormControlLabel
-								control={<Checkbox defaultChecked />}
-								label='Remember'
-							/>
-						</FormGroup>
-						<Button
-							variant='contained'
-							sx={{
-								width: "max-content",
-								margin: "0 auto",
-								padding: "12px 48px",
-								fontFamily: "Poppins, sans-serif",
-								borderRadius: 999,
-								fontWeight: 600,
-								textTransform: "none",
-								fontSize: "20px"
-							}}>
-							Login
-						</Button>
-						<WebText textAlign={"center"}>
-							This form is protected by hCaptcha and its
-							<Link to={"/"} style={{ fontWeight: 500 }}>
-								{" "}
-								Privacy Policy{" "}
-							</Link>{" "}
-							and
-							<Link to={"/"} style={{ fontWeight: 500 }}>
-								{" "}
-								Terms of Service{" "}
-							</Link>{" "}
-							apply.
-						</WebText>
-					</FormSubmit>
+					<Formik
+						initialValues={{
+							email: "",
+							password: "",
+							remember: ""
+						}}
+						validationSchema={LOGIN_FORM_SCHEME}
+						onSubmit={onLogin}>
+						{({ values, handleChange, handleSubmit, errors, touched }) => (
+							<FormSubmit>
+								<WebInput
+									label={"Email"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									value={values.email}
+									onChange={handleChange("email")}
+									touched={touched.email}
+									messageError={errors.email}
+								/>
+								<WebInput
+									label={"Password"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									type={"password"}
+									value={values.password}
+									touched={touched.password}
+									onChange={handleChange("password")}
+									messageError={errors.password}
+								/>
+
+								<FormGroup>
+									<FormControlLabel
+										control={
+											<Checkbox
+												defaultChecked
+												onChange={handleChange("remember")}
+											/>
+										}
+										label='Remember'
+										value={values.remember}
+									/>
+								</FormGroup>
+								<Button
+									variant='contained'
+									sx={{
+										width: "max-content",
+										margin: "0 auto",
+										padding: "12px 48px",
+										fontFamily: "Poppins, sans-serif",
+										borderRadius: 999,
+										fontWeight: 600,
+										textTransform: "none",
+										fontSize: "20px"
+									}}
+									onClick={handleSubmit}>
+									Login
+								</Button>
+								<WebText textAlign={"center"}>
+									This form is protected by hCaptcha and its
+									<Link to={"/"} style={{ fontWeight: 500 }}>
+										{" "}
+										Privacy Policy{" "}
+									</Link>{" "}
+									and
+									<Link to={"/"} style={{ fontWeight: 500 }}>
+										{" "}
+										Terms of Service{" "}
+									</Link>{" "}
+									apply.
+								</WebText>
+							</FormSubmit>
+						)}
+					</Formik>
 				</CardShadow>
 			</BoxForm>
 		</Container>
