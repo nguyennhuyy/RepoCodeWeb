@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebText from "~/components/WebText";
 import { COLOR } from "~/utils/appConst";
 import {
 	Wrapper,
 	Header,
+	BoxOutLet,
 	Left,
 	Center,
 	Right,
@@ -45,7 +46,7 @@ const LayoutHeader = () => {
 			<Right>
 				<BoxAuth>
 					<WebText fontSize={16} fontWeight={400}>
-						Login
+						<Link to={"/login"}>Login</Link>
 					</WebText>
 				</BoxAuth>
 				<BoxAuth activeBg>
@@ -114,7 +115,9 @@ const LayoutDefault = () => {
 	return (
 		<Wrapper>
 			<LayoutHeader />
-			<Outlet />
+			<BoxOutLet>
+				<Outlet />
+			</BoxOutLet>
 			<LayoutBottom />
 		</Wrapper>
 	);

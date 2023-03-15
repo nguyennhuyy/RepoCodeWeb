@@ -136,5 +136,6 @@ export const PictureItem = styled.div({
 export const ImagePictureItem = styled.img({
 	maxWidth: "100%",
 	height: "auto",
-	borderRadius: 16
+	borderRadius: 16,
+	userSelect: "none"
 });
