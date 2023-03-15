@@ -8,7 +8,7 @@ export default class APIUtils {
 
 	static setAccessToken(token) {
 		this.accessToken = `Bearer ${token}`;
-		console.log("token", token);
+		console.log(">>> access token", token);
 	}
 	static changeCurrentLanguage(value = "vn") {
 		this.currentLanguage = value;
@@ -26,7 +26,7 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Beaer ${this.accessToken}`
+					Authorization: `Bearer ${this.accessToken}`
 				}
 			};
 			try {
@@ -51,7 +51,7 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Beaer ${this.accessToken}`
+					Authorization: `Bearer ${this.accessToken}`
 				},
 				data: JSON.stringify(postData)
 			};

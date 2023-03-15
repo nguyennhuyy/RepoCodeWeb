@@ -1,6 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebText from "~/components/WebText";
+import useSelectorShallow from "~/hooks/useSelectorShallow";
+import { getUserInfoSelector } from "~/redux/selectors/userSelector";
 import { COLOR } from "~/utils/appConst";
 import {
 	Wrapper,
@@ -22,6 +24,7 @@ import {
 	ItemCopyright
 } from "./styles";
 const LayoutHeader = () => {
+	const infoUser = useSelectorShallow(getUserInfoSelector);
 	return (
 		<Header>
 			<Left>
@@ -45,18 +48,20 @@ const LayoutHeader = () => {
 					</BoxItem>
 				</BoxList>
 			</Center>
-			<Right>
-				<BoxAuth>
-					<WebText fontSize={16} fontWeight={400}>
-						<Link to={"/login"}>Login</Link>
-					</WebText>
-				</BoxAuth>
-				<BoxAuth activeBg>
-					<WebText fontSize={16} fontWeight={400}>
-						<Link to={"/register"}>Sign up</Link>
-					</WebText>
-				</BoxAuth>
-			</Right>
+			{!infoUser?.token && (
+				<Right>
+					<BoxAuth>
+						<WebText fontSize={16} fontWeight={400}>
+							<Link to={"/login"}>Login</Link>
+						</WebText>
+					</BoxAuth>
+					<BoxAuth activeBg>
+						<WebText fontSize={16} fontWeight={400}>
+							<Link to={"/register"}>Sign up</Link>
+						</WebText>
+					</BoxAuth>
+				</Right>
+			)}
 		</Header>
 	);
 };

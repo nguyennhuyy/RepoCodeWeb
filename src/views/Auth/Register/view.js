@@ -17,7 +17,11 @@ import {
 	TextLink
 } from "./styles";
 import LoginSocial from "../LoginSocial/LoginSocial";
-const RegisterScreen = () => {
+import WebInput from "~/components/WebInput";
+import { LOGIN_FORM_SCHEME, REGISTER_FORM_SCHEME } from "~/helpers/validate";
+import { Formik } from "formik";
+
+const RegisterScreen = ({ onLogin }) => {
 	return (
 		<Container>
 			<BoxTop>
@@ -53,67 +57,101 @@ const RegisterScreen = () => {
 						</WebText>
 						<ItemOr></ItemOr>
 					</DivOr>
-					<FormSubmit>
-						<TextField
-							label='Email'
-							variant='outlined'
-							sx={{
-								width: "100%",
-								marginBottom: "16px"
-							}}
-						/>
-						<TextField
-							label='Password (6 characters minimum)'
-							variant='outlined'
-							type='password'
-							sx={{
-								width: "100%",
-								marginBottom: "16px"
-							}}
-						/>
-						<TextField
-							label='Password confirmation'
-							variant='outlined'
-							type='password'
-							sx={{
-								width: "100%",
-								marginBottom: "16px"
-							}}
-						/>
-						<FormGroup>
-							<FormControlLabel
-								control={<Checkbox defaultChecked />}
-								label='I agree to the Terms of Service and Privacy Policy.'
-							/>
-						</FormGroup>
-						<Button
-							variant='contained'
-							sx={{
-								width: "max-content",
-								margin: "0 auto",
-								padding: "12px 48px",
-								fontFamily: "Poppins, sans-serif",
-								borderRadius: 999,
-								fontWeight: 600,
-								textTransform: "none",
-								fontSize: "20px"
-							}}>
-							Sign up
-						</Button>
-						<WebText textAlign={"center"}>
-							This form is protected by hCaptcha and its
-							<Link to={"/"} style={{ fontWeight: 500 }}>
-								{" "}
-								Privacy Policy{" "}
-							</Link>{" "}
-							and
-							<Link to={"/"} style={{ fontWeight: 500 }}>
-								{" "}
-								Terms of Service{" "}
-							</Link>{" "}
-							apply.
-						</WebText>
-					</FormSubmit>
+					<Formik
+						initialValues={{
+							fullname: "",
+							email: "",
+							password: "",
+							passwordConfirm: ""
+						}}
+						validationSchema={REGISTER_FORM_SCHEME}
+						onSubmit={onLogin}>
+						{({ values, handleChange, handleSubmit, errors, touched }) => (
+							<FormSubmit>
+								<WebInput
+									label={"Full name"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									value={values.fullname}
+									onChange={handleChange("fullname")}
+									touched={touched.fullname}
+									messageError={errors.fullname}
+								/>
+								<WebInput
+									label={"Email"}
+									type={"email"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									value={values.email}
+									onChange={handleChange("email")}
+									touched={touched.email}
+									messageError={errors.email}
+								/>
+								<WebInput
+									label={"Password (6 characters minimum)"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									type={"password"}
+									value={values.password}
+									touched={touched.password}
+									onChange={handleChange("password")}
+									messageError={errors.password}
+								/>
+								<WebInput
+									label={"Password confirmation"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									type={"password"}
+									value={values.passwordConfirm}
+									touched={touched.passwordConfirm}
+									onChange={handleChange("passwordConfirm")}
+									messageError={errors.passwordConfirm}
+								/>
+								<FormGroup>
+									<FormControlLabel
+										control={<Checkbox defaultChecked />}
+										label='I agree to the Terms of Service and Privacy Policy.'
+									/>
+								</FormGroup>
+								<Button
+									onClick={handleSubmit}
+									variant='contained'
+									sx={{
+										width: "max-content",
+										margin: "0 auto",
+										padding: "12px 48px",
+										fontFamily: "Poppins, sans-serif",
+										borderRadius: 999,
+										fontWeight: 600,
+										textTransform: "none",
+										fontSize: "20px"
+									}}>
+									Sign up
+								</Button>
+								<WebText textAlign={"center"}>
+									This form is protected by hCaptcha and its
+									<Link to={"/"} style={{ fontWeight: 500 }}>
+										{" "}
+										Privacy Policy{" "}
+									</Link>{" "}
+									and
+									<Link to={"/"} style={{ fontWeight: 500 }}>
+										{" "}
+										Terms of Service{" "}
+									</Link>{" "}
+									apply.
+								</WebText>
+							</FormSubmit>
+						)}
+					</Formik>
 				</CardShadow>
 			</BoxForm>
 		</Container>

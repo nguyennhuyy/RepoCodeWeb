@@ -60,7 +60,7 @@ const LoginScreen = ({ onLogin }) => {
 						initialValues={{
 							email: "",
 							password: "",
-							remember: ""
+							remember: true
 						}}
 						validationSchema={LOGIN_FORM_SCHEME}
 						onSubmit={onLogin}>
@@ -68,6 +68,7 @@ const LoginScreen = ({ onLogin }) => {
 							<FormSubmit>
 								<WebInput
 									label={"Email"}
+									type={"email"}
 									styles={{
 										width: "100%",
 										marginBottom: "16px"
