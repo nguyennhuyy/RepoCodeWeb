@@ -9,7 +9,13 @@ export const Header = styled.nav({
 	height: "72px",
 	padding: "0 2rem",
 	display: "flex",
-	alignItems: "center"
+	alignItems: "center",
+	position: "fixed",
+	top: 0,
+	left: 0,
+	right: 0,
+	backgroundColor: COLOR.WHITE_0,
+	zIndex: 100
 });
 export const Left = styled.div({
 	marginRight: "2rem",
@@ -18,6 +24,9 @@ export const Left = styled.div({
 	alignItems: "center"
 });
 
+export const BoxOutLet = styled.div({
+	marginTop: 72
+});
 export const Center = styled.div({
 	flex: 4,
 	display: "flex"

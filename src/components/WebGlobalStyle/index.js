@@ -1,8 +1,7 @@
-import { createMuiTheme } from "@mui/material";
 import { createGlobalStyle } from "styled-components";
 import variables from "~/assets/css/root";
-
-export const theme = createMuiTheme({
+import { createTheme } from "@mui/material/styles";
+export const theme = createTheme({
 	typography: {
 		fontFamily: ["Poppins", "sans-serif"].join(",")
 	}
