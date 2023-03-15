@@ -1,4 +1,5 @@
 import { AUTH } from "~/redux/actionsType";
+import ApiUtils from "~/utils/apiUtils";
 const initialState = {
 	token: "",
 	userInfo: {},
@@ -8,6 +9,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case AUTH.SIGN_IN.SUCCESS: {
+			ApiUtils.setAccessToken(action.payload.token);
 			return {
 				...state,
 				token: action.payload.token,

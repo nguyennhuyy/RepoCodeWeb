@@ -17,7 +17,7 @@ import {
 	TextLink
 } from "./styles";
 import LoginSocial from "../LoginSocial/LoginSocial";
-const LoginScreen = () => {
+const RegisterScreen = () => {
 	return (
 		<Container>
 			<BoxTop>
@@ -26,14 +26,14 @@ const LoginScreen = () => {
 					fontWeight={600}
 					textAlign={"center"}
 					margin={"0 0 0 0"}>
-					Login with your Account
+					Create a new Account
 				</WebHeading>
 				<WebText textAlign={"center"} fontSize={16} margin={"0 0 16px 0"}>
-					or create a
-					<Link to='/register' style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
-						new account
+					or
+					<Link to='/login' style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
+						login
 					</Link>
-					for free
+					with an existing account
 				</WebText>
 			</BoxTop>
 			<BoxForm>
@@ -43,7 +43,7 @@ const LoginScreen = () => {
 						textAlign={"center"}
 						fontWeight={500}
 						margin={"0 0 20px 0"}>
-						Login
+						Register
 					</WebHeading>
 					<LoginSocial />
 					<DivOr>
@@ -63,8 +63,18 @@ const LoginScreen = () => {
 							}}
 						/>
 						<TextField
-							label='Password'
+							label='Password (6 characters minimum)'
 							variant='outlined'
+							type='password'
+							sx={{
+								width: "100%",
+								marginBottom: "16px"
+							}}
+						/>
+						<TextField
+							label='Password confirmation'
+							variant='outlined'
+							type='password'
 							sx={{
 								width: "100%",
 								marginBottom: "16px"
@@ -73,7 +83,7 @@ const LoginScreen = () => {
 						<FormGroup>
 							<FormControlLabel
 								control={<Checkbox defaultChecked />}
-								label='Remember'
+								label='I agree to the Terms of Service and Privacy Policy.'
 							/>
 						</FormGroup>
 						<Button
@@ -88,7 +98,7 @@ const LoginScreen = () => {
 								textTransform: "none",
 								fontSize: "20px"
 							}}>
-							Login
+							Sign up
 						</Button>
 						<WebText textAlign={"center"}>
 							This form is protected by hCaptcha and its
@@ -110,4 +120,4 @@ const LoginScreen = () => {
 	);
 };
 
-export default LoginScreen;
+export default RegisterScreen;
