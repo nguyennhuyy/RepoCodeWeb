@@ -1,31 +1,25 @@
 import { AUTH } from "~/redux/actionsType";
+import ApiUtils from "~/utils/apiUtils";
 const initialState = {
 	token: "",
-	userInfo: {},
-	cache: {}
+	userInfo: {}
 };
 
 const authReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case AUTH.SIGN_IN.SUCCESS: {
+			ApiUtils.setAccessToken(action.payload.token);
 			return {
 				...state,
 				token: action.payload.token,
-				userInfo: action.payload.userInfo,
-				cache: action.payload.save
+				userInfo: action.payload.userInfo
 			};
 		}
 		case AUTH.SIGN_OUT.SUCCESS: {
 			return {
 				...state,
 				token: "",
-				userInfo: {
-					email: "",
-					firstname: "",
-					lastname: "",
-					phonenumber: "",
-					staffid: ""
-				}
+				userInfo: {}
 			};
 		}
 		default:

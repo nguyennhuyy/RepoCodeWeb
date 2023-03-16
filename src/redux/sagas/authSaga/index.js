@@ -1,33 +1,72 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import { AUTH } from "~/redux/actionsType";
 import { invoke } from "~/helpers/sagas";
-import { signInSuccess } from "~/redux/actions/authActions";
+import { signInApi, signUpApi } from "~/redux/api/authApis";
+import { signInSuccess, signInSubmit } from "~/redux/actions/authActions";
 import APIUtils from "~/utils/apiUtils";
-
 export default function* infoSagas() {
 	yield takeLatest(AUTH.SIGN_IN.HANDLER, signInSaga);
+	yield takeLatest(AUTH.SIGN_UP.HANDLER, signUpSaga);
 }
-
 function* signInSaga({ payload, type }) {
-	const { showLoading = true } = payload || {};
+	const {
+		showLoading = true,
+		email,
+		password,
+		remember,
+		callback = () => {},
+		errorCb = () => {}
+	} = payload || {};
 	yield invoke(
 		function* execution() {
-			// const result = yield call(signInApi, payload.userName, payload.password);
-			// if (result.access_token && result.user_info) {
-			// 	yield APIUtils.setAccessToken(result.access_token);
-			// 	yield put(
-			// 		signInSuccess({
-			// 			userInfo: result.user_info,
-			// 			token: result.access_token,
-			// 			save: payload.save
-			// 				? { username: payload.userName, password: payload.password }
-			// 				: {}
-			// 		})
-			// 	);
-			// }
+			const result = yield call(signInApi, email, password, remember);
+			if (result.token) {
+				yield APIUtils.setAccessToken(result.token);
+				yield put(
+					signInSuccess({
+						userInfo: result,
+						token: result.token
+					})
+				);
+				yield callback(result);
+			}
 		},
 		null,
 		showLoading,
-		type
+		type,
+		function* callbackError(err) {
+			yield errorCb(err.response);
+		}
+	);
+}
+function* signUpSaga({ payload, type }) {
+	const {
+		showLoading = true,
+		fullname,
+		email,
+		password,
+		callback = () => {},
+		errorCb = () => {}
+	} = payload || {};
+	yield invoke(
+		function* execution() {
+			const result = yield call(signUpApi, fullname, email, password);
+			if (result) {
+				yield put(
+					signInSubmit({
+						email,
+						password,
+						remember: true
+					})
+				);
+				yield callback(result);
+			}
+		},
+		null,
+		showLoading,
+		type,
+		function* callbackError(err) {
+			yield errorCb(err.response);
+		}
 	);
 }

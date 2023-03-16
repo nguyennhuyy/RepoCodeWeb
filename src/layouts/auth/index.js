@@ -17,7 +17,9 @@ const LayoutHeader = () => {
 	return (
 		<Header>
 			<Left>
-				<Logo />
+				<Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
+					<Logo />
+				</Link>
 			</Left>
 		</Header>
 	);

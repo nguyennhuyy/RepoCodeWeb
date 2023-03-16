@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import FormGroup from "@mui/material/FormGroup";
@@ -17,11 +16,12 @@ import {
 	FormSubmit
 } from "./styles";
 import LoginSocial from "../LoginSocial/LoginSocial";
-import { Formik } from "formik";
-import { LOGIN_FORM_SCHEME } from "~/helpers/validate";
 import WebInput from "~/components/WebInput";
+import { REGISTER_FORM_SCHEME } from "~/helpers/validate";
+import { Formik } from "formik";
 import WebError from "~/components/WebError";
-const LoginScreen = ({ onLogin, messageError }) => {
+
+const RegisterScreen = ({ onLogin, messageError }) => {
 	return (
 		<Container>
 			<BoxTop>
@@ -30,14 +30,14 @@ const LoginScreen = ({ onLogin, messageError }) => {
 					fontWeight={600}
 					textAlign={"center"}
 					margin={"0 0 0 0"}>
-					Login with your Account
+					Create a new Account
 				</WebHeading>
 				<WebText textAlign={"center"} fontSize={16} margin={"0 0 16px 0"}>
-					or create a
-					<Link to='/register' style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
-						new account
+					or
+					<Link to='/login' style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
+						login
 					</Link>
-					for free
+					with an existing account
 				</WebText>
 			</BoxTop>
 			<BoxForm>
@@ -47,7 +47,7 @@ const LoginScreen = ({ onLogin, messageError }) => {
 						textAlign={"center"}
 						fontWeight={500}
 						margin={"0 0 20px 0"}>
-						Login
+						Register
 					</WebHeading>
 					<LoginSocial />
 					<DivOr>
@@ -58,17 +58,28 @@ const LoginScreen = ({ onLogin, messageError }) => {
 						<ItemOr></ItemOr>
 					</DivOr>
 					<WebError error={messageError} />
-
 					<Formik
 						initialValues={{
+							fullname: "",
 							email: "",
 							password: "",
-							remember: true
+							passwordConfirm: ""
 						}}
-						validationSchema={LOGIN_FORM_SCHEME}
+						validationSchema={REGISTER_FORM_SCHEME}
 						onSubmit={onLogin}>
 						{({ values, handleChange, handleSubmit, errors, touched }) => (
 							<FormSubmit>
+								<WebInput
+									label={"Full name"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									value={values.fullname}
+									onChange={handleChange("fullname")}
+									touched={touched.fullname}
+									messageError={errors.fullname}
+								/>
 								<WebInput
 									label={"Email"}
 									type={"email"}
@@ -82,7 +93,7 @@ const LoginScreen = ({ onLogin, messageError }) => {
 									messageError={errors.email}
 								/>
 								<WebInput
-									label={"Password"}
+									label={"Password (6 characters minimum)"}
 									styles={{
 										width: "100%",
 										marginBottom: "16px"
@@ -93,20 +104,26 @@ const LoginScreen = ({ onLogin, messageError }) => {
 									onChange={handleChange("password")}
 									messageError={errors.password}
 								/>
-
+								<WebInput
+									label={"Password confirmation"}
+									styles={{
+										width: "100%",
+										marginBottom: "16px"
+									}}
+									type={"password"}
+									value={values.passwordConfirm}
+									touched={touched.passwordConfirm}
+									onChange={handleChange("passwordConfirm")}
+									messageError={errors.passwordConfirm}
+								/>
 								<FormGroup>
 									<FormControlLabel
-										control={
-											<Checkbox
-												defaultChecked
-												onChange={handleChange("remember")}
-											/>
-										}
-										label='Remember'
-										value={values.remember}
+										control={<Checkbox defaultChecked />}
+										label='I agree to the Terms of Service and Privacy Policy.'
 									/>
 								</FormGroup>
 								<Button
+									onClick={handleSubmit}
 									variant='contained'
 									sx={{
 										width: "max-content",
@@ -117,9 +134,8 @@ const LoginScreen = ({ onLogin, messageError }) => {
 										fontWeight: 600,
 										textTransform: "none",
 										fontSize: "20px"
-									}}
-									onClick={handleSubmit}>
-									Login
+									}}>
+									Sign up
 								</Button>
 								<WebText textAlign={"center"}>
 									This form is protected by hCaptcha and its
@@ -143,4 +159,4 @@ const LoginScreen = ({ onLogin, messageError }) => {
 	);
 };
 
-export default LoginScreen;
+export default RegisterScreen;
