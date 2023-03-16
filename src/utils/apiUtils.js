@@ -1,14 +1,12 @@
 import axios from "axios";
 const REQUEST_TIMEOUT = 60000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
-console.log(">>> URL_API", URL_API);
 export default class APIUtils {
 	accessToken = "";
 	currentLanguage = "";
 
 	static setAccessToken(token) {
 		this.accessToken = `Bearer ${token}`;
-		console.log(">>> access token", token);
 	}
 	static changeCurrentLanguage(value = "vn") {
 		this.currentLanguage = value;
