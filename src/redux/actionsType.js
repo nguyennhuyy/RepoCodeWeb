@@ -25,3 +25,6 @@ export const AUTH = {
 	SIGN_OUT: asyncTypes("AUTH/SIGN_OUT"),
 	SYNC_TOKEN_FCM: asyncTypes("SYNC_TOKEN_FCM")
 };
+export const ERROR = {
+	ERROR_DISPATCH: asyncTypes("ERROR_ERROR_DISPATCH")
+};

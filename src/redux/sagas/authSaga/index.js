@@ -9,7 +9,14 @@ export default function* infoSagas() {
 	yield takeLatest(AUTH.SIGN_UP.HANDLER, signUpSaga);
 }
 function* signInSaga({ payload, type }) {
-	const { showLoading = true, email, password, remember } = payload || {};
+	const {
+		showLoading = true,
+		email,
+		password,
+		remember,
+		callback = () => {},
+		errorCb = () => {}
+	} = payload || {};
 	yield invoke(
 		function* execution() {
 			const result = yield call(signInApi, email, password, remember);
@@ -21,11 +28,15 @@ function* signInSaga({ payload, type }) {
 						token: result.token
 					})
 				);
+				yield callback(result);
 			}
 		},
 		null,
 		showLoading,
-		type
+		type,
+		function* callbackError(err) {
+			yield errorCb(err.response);
+		}
 	);
 }
 function* signUpSaga({ payload, type }) {
@@ -34,12 +45,12 @@ function* signUpSaga({ payload, type }) {
 		fullname,
 		email,
 		password,
-		callback = () => {}
+		callback = () => {},
+		errorCb = () => {}
 	} = payload || {};
 	yield invoke(
 		function* execution() {
 			const result = yield call(signUpApi, fullname, email, password);
-			console.log(">>> result sign up", result);
 			if (result) {
 				yield put(
 					signInSubmit({
@@ -53,6 +64,9 @@ function* signUpSaga({ payload, type }) {
 		},
 		null,
 		showLoading,
-		type
+		type,
+		function* callbackError(err) {
+			yield errorCb(err.response);
+		}
 	);
 }

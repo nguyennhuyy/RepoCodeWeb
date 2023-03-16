@@ -48,7 +48,7 @@ const LayoutHeader = () => {
 					</BoxItem>
 				</BoxList>
 			</Center>
-			{!infoUser?.token && (
+			{!infoUser?.token ? (
 				<Right>
 					<BoxAuth>
 						<WebText fontSize={16} fontWeight={400}>
@@ -61,6 +61,8 @@ const LayoutHeader = () => {
 						</WebText>
 					</BoxAuth>
 				</Right>
+			) : (
+				<div>Logout</div>
 			)}
 		</Header>
 	);

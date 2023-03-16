@@ -20,7 +20,8 @@ import LoginSocial from "../LoginSocial/LoginSocial";
 import { Formik } from "formik";
 import { LOGIN_FORM_SCHEME } from "~/helpers/validate";
 import WebInput from "~/components/WebInput";
-const LoginScreen = ({ onLogin }) => {
+import WebError from "~/components/WebError";
+const LoginScreen = ({ onLogin, messageError }) => {
 	return (
 		<Container>
 			<BoxTop>
@@ -56,6 +57,8 @@ const LoginScreen = ({ onLogin }) => {
 						</WebText>
 						<ItemOr></ItemOr>
 					</DivOr>
+					<WebError error={messageError} />
+
 					<Formik
 						initialValues={{
 							email: "",

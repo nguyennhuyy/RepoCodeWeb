@@ -13,15 +13,15 @@ import {
 	CardShadow,
 	DivOr,
 	ItemOr,
-	FormSubmit,
-	TextLink
+	FormSubmit
 } from "./styles";
 import LoginSocial from "../LoginSocial/LoginSocial";
 import WebInput from "~/components/WebInput";
-import { LOGIN_FORM_SCHEME, REGISTER_FORM_SCHEME } from "~/helpers/validate";
+import { REGISTER_FORM_SCHEME } from "~/helpers/validate";
 import { Formik } from "formik";
+import WebError from "~/components/WebError";
 
-const RegisterScreen = ({ onLogin }) => {
+const RegisterScreen = ({ onLogin, messageError }) => {
 	return (
 		<Container>
 			<BoxTop>
@@ -57,6 +57,7 @@ const RegisterScreen = ({ onLogin }) => {
 						</WebText>
 						<ItemOr></ItemOr>
 					</DivOr>
+					<WebError error={messageError} />
 					<Formik
 						initialValues={{
 							fullname: "",

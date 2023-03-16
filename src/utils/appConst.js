@@ -10,5 +10,7 @@ export const COLOR = {
 	RGB_4: "rgba(152 ,110, 0 ,1)",
 	RGB_5: "rgba(0 ,0, 0 ,0.1)",
 	BLUE_0: "#0F70E6",
-	RED_0: "#DB2C6F"
+	RED_0: "#DB2C6F",
+	PINK_0: "#fef0f0",
+	PINK_1: "#F56C6C"
 };
