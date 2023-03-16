@@ -2,7 +2,11 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import { AUTH } from "~/redux/actionsType";
 import { invoke } from "~/helpers/sagas";
 import { signInApi, signUpApi } from "~/redux/api/authApis";
-import { signInSuccess, signInSubmit } from "~/redux/actions/authActions";
+import {
+	signInSuccess,
+	signInSubmit,
+	signOutSubmit
+} from "~/redux/actions/authActions";
 import APIUtils from "~/utils/apiUtils";
 export default function* infoSagas() {
 	yield takeLatest(AUTH.SIGN_IN.HANDLER, signInSaga);

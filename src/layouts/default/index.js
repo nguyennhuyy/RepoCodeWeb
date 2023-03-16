@@ -1,7 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { Button } from "@mui/material";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebText from "~/components/WebText";
+import { useActions } from "~/hooks/useActions";
 import useSelectorShallow from "~/hooks/useSelectorShallow";
+import { signOutSubmit } from "~/redux/actions/authActions";
 import { getUserInfoSelector } from "~/redux/selectors/userSelector";
 import { COLOR } from "~/utils/appConst";
 import {
@@ -25,6 +28,14 @@ import {
 } from "./styles";
 const LayoutHeader = () => {
 	const infoUser = useSelectorShallow(getUserInfoSelector);
+	const actions = useActions({
+		signOutSubmit
+	});
+	const navigate = useNavigate();
+	const logOutFunc = () => {
+		actions.signOutSubmit();
+		navigate("/login");
+	};
 	return (
 		<Header>
 			<Left>
@@ -57,12 +68,15 @@ const LayoutHeader = () => {
 					</BoxAuth>
 					<BoxAuth activeBg>
 						<WebText fontSize={16} fontWeight={400}>
-							<Link to={"/register"}>Sign up</Link>
+							<Link to={"/"}>Sign up</Link>
 						</WebText>
 					</BoxAuth>
 				</Right>
 			) : (
-				<div>Logout</div>
+				<Button onClick={logOutFunc}>
+					{/* <Link to={"/"}>Log Out</Link> */}
+					<WebText>Log Out</WebText>
+				</Button>
 			)}
 		</Header>
 	);

@@ -44,8 +44,3 @@ export const signOutSubmit = payload => ({
 	type: AUTH.SIGN_OUT.HANDLER,
 	payload
 });
-
-export const signOutSuccess = payload => ({
-	type: AUTH.SIGN_OUT.SUCCESS,
-	payload
-});

@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
 				userInfo: action.payload.userInfo
 			};
 		}
-		case AUTH.SIGN_OUT.SUCCESS: {
+		case AUTH.SIGN_OUT.HANDLER: {
 			return {
 				...state,
 				token: "",
