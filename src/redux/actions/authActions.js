@@ -9,7 +9,14 @@ export const signInSuccess = payload => ({
 	type: AUTH.SIGN_IN.SUCCESS,
 	payload
 });
-
+export const signInGoogleSubmit = payload => ({
+	type: AUTH.SIGN_IN_GOOGLE.HANDLER,
+	payload
+});
+export const signInFacebookSubmit = payload => ({
+	type: AUTH.SIGN_IN_FACEBOOK.HANDLER,
+	payload
+});
 export const signUpSubmit = payload => ({
 	type: AUTH.SIGN_UP.HANDLER,
 	payload
