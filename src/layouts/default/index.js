@@ -68,7 +68,7 @@ const LayoutHeader = () => {
 					</BoxAuth>
 					<BoxAuth activeBg>
 						<WebText fontSize={16} fontWeight={400}>
-							<Link to={"/"}>Sign up</Link>
+							<Link to={"/register"}>Sign up</Link>
 						</WebText>
 					</BoxAuth>
 				</Right>
