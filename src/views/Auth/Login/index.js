@@ -25,7 +25,9 @@ const LoginView = () => {
 				}
 			},
 			errorCb: data => {
-				setDataError(data.data);
+				if (data) {
+					setDataError(data?.data);
+				}
 			}
 		};
 		actions.signInSubmit({ ...opt });

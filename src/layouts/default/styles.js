@@ -106,3 +106,28 @@ export const ItemCopyright = styled.div({
 	display: "flex",
 	justifyContent: "space-between"
 });
+export const ItemAvatar = styled.div({
+	position: "relative"
+});
+
+export const BoxModalInfo = styled.div({
+	display: "flex",
+	flexDirection: "column",
+	width: 260,
+	padding: 24,
+	position: "absolute",
+	top: "100%",
+	right: "60%",
+	zIndex: 999,
+	backgroundColor: COLOR.WHITE_0,
+	boxShadow: `0 0 40px ${COLOR.RGB_5}`,
+	borderRadius: 16
+});
+
+export const ImageAvatar = styled.img({
+	width: 45,
+	height: 45,
+	borderRadius: 99,
+	objectFit: "cover",
+	cursor: "pointer"
+});

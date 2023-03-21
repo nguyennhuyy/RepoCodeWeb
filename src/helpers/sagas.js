@@ -27,7 +27,10 @@ export function* invoke(
 	} catch (error) {
 		console.info(`Saga Invoke Error [${actionType}]>>>>>`, error);
 		yield put(nonFetching(actionType));
-		if (error.response.status === 401) {
+		if (showDialog) {
+			yield put(hideLoading(actionType));
+		}
+		if (error?.response?.status === 401) {
 			yield put(signOutSubmit(actionType));
 		}
 		if (callbackError) {
@@ -36,15 +39,6 @@ export function* invoke(
 		if (showDialog) {
 			yield put(hideLoading(actionType));
 		}
-
-		// const token = yield select(getUserTokenSelector);
-		// if (error && error.error_code === -1) {
-		// 	//   //exp token
-		// 	if (token) {
-		// 		yield put(signOutSubmit());
-		// 	}
-		// 	return;
-		// }
 
 		if (typeof handleError === "function") {
 			yield handleError(error);

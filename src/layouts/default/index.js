@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
+import { forwardRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
+import WebAvatar from "~/components/WebAvatar";
 import WebText from "~/components/WebText";
+import { getAvatarName } from "~/helpers/formatValue";
 import { useActions } from "~/hooks/useActions";
+import useComponentVisible from "~/hooks/useComponentVisible";
 import useSelectorShallow from "~/hooks/useSelectorShallow";
 import { signOutSubmit } from "~/redux/actions/authActions";
 import { getUserInfoSelector } from "~/redux/selectors/userSelector";
@@ -24,10 +28,64 @@ import {
 	ItemLogo,
 	ListBottom,
 	ItemList,
-	ItemCopyright
+	ItemCopyright,
+	ItemAvatar,
+	ImageAvatar,
+	BoxModalInfo
 } from "./styles";
+const ModalInfo = forwardRef(
+	({ logOutFunc, fullname, isComponentVisible }, ref) => {
+		return (
+			<div ref={ref}>
+				{isComponentVisible && (
+					<BoxModalInfo>
+						<WebText
+							fontSize={16}
+							fontWeight={500}
+							margin={0}
+							style={{
+								margin: 0,
+								padding: "8px 0",
+								cursor: "default"
+							}}>
+							{fullname}
+						</WebText>
+						<WebText
+							fontSize={16}
+							style={{
+								":hover": {
+									color: COLOR.RGB_4
+								},
+								margin: 0,
+								padding: "8px 0",
+								cursor: "pointer"
+							}}>
+							My Account
+						</WebText>
+						<WebText
+							fontSize={16}
+							style={{
+								":hover": {
+									color: COLOR.RGB_4
+								},
+								margin: 0,
+								padding: "8px 0",
+								cursor: "pointer"
+							}}
+							onClick={logOutFunc}>
+							Logout
+						</WebText>
+					</BoxModalInfo>
+				)}
+			</div>
+		);
+	}
+);
 const LayoutHeader = () => {
 	const infoUser = useSelectorShallow(getUserInfoSelector);
+	const [toggleBox, setToggleBox] = useState(false);
+	const { ref, isComponentVisible, setIsComponentVisile } =
+		useComponentVisible(false);
 	const actions = useActions({
 		signOutSubmit
 	});
@@ -73,10 +131,34 @@ const LayoutHeader = () => {
 					</BoxAuth>
 				</Right>
 			) : (
-				<Button onClick={logOutFunc}>
-					{/* <Link to={"/"}>Log Out</Link> */}
-					<WebText>Log Out</WebText>
-				</Button>
+				<>
+					<ItemAvatar>
+						{infoUser.avatar ? (
+							<ImageAvatar
+								src={infoUser.avatar}
+								onClick={() => {
+									setIsComponentVisile(true);
+									setToggleBox(prev => !prev);
+								}}
+							/>
+						) : (
+							<WebAvatar
+								item={getAvatarName(infoUser)}
+								onClick={() => {
+									setIsComponentVisile(true);
+									setToggleBox(prev => !prev);
+								}}></WebAvatar>
+						)}
+						{toggleBox && (
+							<ModalInfo
+								logOutFunc={logOutFunc}
+								fullname={infoUser.fullname}
+								ref={ref}
+								isComponentVisible={isComponentVisible}
+							/>
+						)}
+					</ItemAvatar>
+				</>
 			)}
 		</Header>
 	);
@@ -134,6 +216,7 @@ const LayoutBottom = () => {
 		</BoxBottom>
 	);
 };
+
 const LayoutDefault = () => {
 	return (
 		<Wrapper>

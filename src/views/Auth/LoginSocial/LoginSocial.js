@@ -41,7 +41,9 @@ const LoginSocial = () => {
 						}
 					},
 					errorCb: data => {
-						setDataError(data.data);
+						if (data) {
+							setDataError(data?.data);
+						}
 					}
 				};
 				actions.signInGoogleSubmit({
@@ -67,7 +69,9 @@ const LoginSocial = () => {
 						}
 					},
 					errorCb: data => {
-						setDataError(data.data);
+						if (data) {
+							setDataError(data?.data);
+						}
 					}
 				};
 				actions.signInFacebookSubmit({

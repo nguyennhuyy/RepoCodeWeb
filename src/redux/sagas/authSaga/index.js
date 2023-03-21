@@ -46,7 +46,7 @@ function* signInSaga({ payload, type }) {
 		showLoading,
 		type,
 		function* callbackError(err) {
-			yield errorCb(err.response);
+			yield errorCb(err?.response);
 		}
 	);
 }
