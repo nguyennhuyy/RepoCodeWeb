@@ -7,13 +7,16 @@ const UserView = () => {
 	const navigate = useNavigate();
 	const actions = useActions({ userUpdateInfoSubmit });
 	const handleUpdate = data => {
+		console.log(">>> data", data);
 		const opt = {
 			avatar: data.avatar,
 			fullname: data.fullname,
 			birthday: data.birthday,
 			gender: data.gender,
 			address: data.address,
-			callback: () => {},
+			callback: data => {
+				console.log(">>> data res", data);
+			},
 			errorCb: () => {}
 		};
 		actions.userUpdateInfoSubmit({ ...opt });

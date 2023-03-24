@@ -1,11 +1,12 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import { USER } from "~/redux/actionsType";
 import { invoke } from "~/helpers/sagas";
-import { userUpload } from "~/redux/api/userApis";
+import { userUpload, userUpdateInfo } from "~/redux/api/userApis";
 import {
 	userUploadSubmit,
 	userUpdateInfoSubmit
 } from "~/redux/actions/userActions";
+import { signInUpdate } from "~/redux/actions/authActions";
 export default function* userSaga() {
 	yield takeLatest(USER.USER_UPDATE.HANDLER, userUpdateSaga);
 }
@@ -23,7 +24,22 @@ function* userUpdateSaga({ payload, type }) {
 	yield invoke(
 		function* execution() {
 			const urlAvatar = yield call(userUpload, avatar);
-			console.log(">>> urlAvatar", urlAvatar);
+			if (urlAvatar) {
+				const result = yield call(
+					userUpdateInfo,
+					urlAvatar.image,
+					fullname,
+					birthday,
+					gender,
+					address
+				);
+				yield put(
+					signInUpdate({
+						userInfo: result
+					})
+				);
+				console.log(">>> urlAvatar", result);
+			}
 		},
 		null,
 		showLoading,

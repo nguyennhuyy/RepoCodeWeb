@@ -1,10 +1,10 @@
 import axios from "axios";
 const REQUEST_TIMEOUT = 60000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
-let getToken = localStorage.getItem("persist:auth");
-getToken = JSON.parse(getToken);
+let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+let tokens = getToken.token;
 export default class APIUtils {
-	accessToken = getToken?.token || "";
+	accessToken = tokens || "";
 	currentLanguage = "";
 	static setAccessToken(token) {
 		this.accessToken = `${token}`;
@@ -25,7 +25,9 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.accessToken}`
+					authorization: `Bearer ${
+						this.accessToken || tokens.slice(1, tokens.length - 1)
+					}`
 				}
 			};
 			try {
@@ -50,7 +52,9 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.accessToken}`
+					authorization: `Bearer ${
+						this.accessToken || tokens.slice(1, tokens.length - 1)
+					}`
 				},
 				data: JSON.stringify(postData)
 			};
@@ -70,19 +74,15 @@ export default class APIUtils {
 
 	static uploadFile(path, file, name, headers) {
 		var fd = new FormData();
-		var newFile = {
-			...file,
-			name: file.filename || file.fileName || "my_photo.jpg",
-			type: file.type || "image/jpeg"
-		};
-		fd.append(name, newFile);
-
+		fd.append(name, file);
 		return new Promise((resolve, reject) =>
 			axios
 				.post(`${URL_API}/${path}`, fd, {
 					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${this.accessToken}`
+						"Content-Type": "multipart/form-data",
+						authorization: `Bearer ${
+							this.accessToken || tokens.slice(1, tokens.length - 1)
+						}`
 					}
 				})
 				.then(response => {

@@ -8,7 +8,10 @@ import { useActions } from "~/hooks/useActions";
 import useComponentVisible from "~/hooks/useComponentVisible";
 import useSelectorShallow from "~/hooks/useSelectorShallow";
 import { signOutSubmit } from "~/redux/actions/authActions";
-import { getUserInfoSelector } from "~/redux/selectors/userSelector";
+import {
+	getUserInfoSelector,
+	getTokenSelector
+} from "~/redux/selectors/userSelector";
 import { COLOR } from "~/utils/appConst";
 import {
 	Wrapper,
@@ -82,6 +85,7 @@ const ModalInfo = forwardRef(
 );
 const LayoutHeader = () => {
 	const infoUser = useSelectorShallow(getUserInfoSelector);
+	const token = useSelectorShallow(getTokenSelector);
 	const [toggleBox, setToggleBox] = useState(false);
 	const { ref, isComponentVisible, setIsComponentVisile } =
 		useComponentVisible(false);
@@ -118,7 +122,7 @@ const LayoutHeader = () => {
 					</BoxItem>
 				</BoxList>
 			</Center>
-			{!infoUser?.token ? (
+			{!token ? (
 				<Right>
 					<BoxAuth>
 						<WebText fontSize={16} fontWeight={400}>

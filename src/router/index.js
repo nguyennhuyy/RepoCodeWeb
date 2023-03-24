@@ -8,9 +8,9 @@ import UserView from "~/views/User";
 import PrivateRoute from "./PrivateRoute";
 
 import useSelectorShallow from "~/hooks/useSelectorShallow";
-import { getUserInfoSelector } from "~/redux/selectors/userSelector";
+import { getTokenSelector } from "~/redux/selectors/userSelector";
 const RootRouter = () => {
-	const infoUser = useSelectorShallow(getUserInfoSelector);
+	const token = useSelectorShallow(getTokenSelector);
 	return (
 		<Routes>
 			<Route path='/' element={<LayoutDefault />}>
@@ -25,13 +25,11 @@ const RootRouter = () => {
 			<Route path='/auth' element={<LayoutAuth />}>
 				<Route
 					path='login'
-					element={infoUser.token ? <Navigate to={"/dashboard"} /> : <Login />}
+					element={token ? <Navigate to={"/dashboard"} /> : <Login />}
 				/>
 				<Route
 					path='register'
-					element={
-						infoUser.token ? <Navigate to={"/dashboard"} /> : <Register />
-					}
+					element={token ? <Navigate to={"/dashboard"} /> : <Register />}
 				/>
 			</Route>
 		</Routes>

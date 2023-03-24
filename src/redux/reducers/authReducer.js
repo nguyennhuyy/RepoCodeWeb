@@ -22,6 +22,12 @@ const authReducer = (state = initialState, action) => {
 				userInfo: {}
 			};
 		}
+		case AUTH.SIGN_IN_UPDATE.SUCCESS: {
+			return {
+				...state,
+				userInfo: action.payload.userInfo
+			};
+		}
 		default:
 			return state;
 	}
