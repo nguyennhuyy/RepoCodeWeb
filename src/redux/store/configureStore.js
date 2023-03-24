@@ -21,8 +21,8 @@ function configureStore() {
 	store = createStore(persistedReducer, bindMiddleware(middlewares));
 	const persistor = persistStore(store);
 	store.sagaTask = sagaMiddleware.run(rootSaga);
-
-	return { store, persistor };
+	const state = store.getState();
+	return { store, persistor, state };
 }
 
 export default configureStore;

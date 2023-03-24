@@ -21,7 +21,7 @@ const LoginView = () => {
 			remember: data.remember,
 			callback: data => {
 				if (data) {
-					navigate("/");
+					navigate("/dashboard");
 				}
 			},
 			errorCb: data => {

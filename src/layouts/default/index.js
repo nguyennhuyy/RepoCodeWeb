@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { forwardRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
@@ -34,7 +33,7 @@ import {
 	BoxModalInfo
 } from "./styles";
 const ModalInfo = forwardRef(
-	({ logOutFunc, fullname, isComponentVisible }, ref) => {
+	({ logOutFunc, fullname, isComponentVisible, infoUser }, ref) => {
 		return (
 			<div ref={ref}>
 				{isComponentVisible && (
@@ -60,7 +59,7 @@ const ModalInfo = forwardRef(
 								padding: "8px 0",
 								cursor: "pointer"
 							}}>
-							My Account
+							<Link to={`/${infoUser._id}`}> My Account</Link>
 						</WebText>
 						<WebText
 							fontSize={16}
@@ -97,7 +96,9 @@ const LayoutHeader = () => {
 	return (
 		<Header>
 			<Left>
-				<Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
+				<Link
+					to={"/dashboard"}
+					style={{ display: "flex", alignItems: "center" }}>
 					<Logo />
 				</Link>
 			</Left>
@@ -121,12 +122,12 @@ const LayoutHeader = () => {
 				<Right>
 					<BoxAuth>
 						<WebText fontSize={16} fontWeight={400}>
-							<Link to={"/login"}>Login</Link>
+							<Link to={"/auth/login"}>Login</Link>
 						</WebText>
 					</BoxAuth>
 					<BoxAuth activeBg>
 						<WebText fontSize={16} fontWeight={400}>
-							<Link to={"/register"}>Sign up</Link>
+							<Link to={"/auth/register"}>Sign up</Link>
 						</WebText>
 					</BoxAuth>
 				</Right>
@@ -155,6 +156,7 @@ const LayoutHeader = () => {
 								fullname={infoUser.fullname}
 								ref={ref}
 								isComponentVisible={isComponentVisible}
+								infoUser={infoUser}
 							/>
 						)}
 					</ItemAvatar>

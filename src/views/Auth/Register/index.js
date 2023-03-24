@@ -23,7 +23,7 @@ const RegisterView = () => {
 			password,
 			callback: data => {
 				if (data) {
-					navigate("/");
+					navigate("/dashboard");
 				}
 			},
 			errorCb: data => {

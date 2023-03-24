@@ -27,6 +27,11 @@ export const AUTH = {
 	SIGN_IN_FACEBOOK: asyncTypes("SIGN_IN_FACEBOOK"),
 	SIGN_IN_GOOGLE: asyncTypes("SIGN_IN_GOOGLE")
 };
+export const USER = {
+	USER_UPLOAD: asyncTypes("USER_UPLOAD"),
+	USER_UPDATE: asyncTypes("USER_UPDATE")
+};
+
 export const ERROR = {
 	ERROR_DISPATCH: asyncTypes("ERROR_ERROR_DISPATCH")
 };

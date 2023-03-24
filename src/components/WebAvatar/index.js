@@ -4,12 +4,23 @@ import { COLOR } from "~/utils/appConst";
 import { BoxAvatar } from "./styles";
 const listColor = ["#007BFF", "#0F892F", "#AF4464", "#FA8A2E", "#986D6A"];
 
-const WebAvatar = ({ item, children, onClick }) => {
+const WebAvatar = ({
+	item,
+	children,
+	onClick,
+	width,
+	height,
+	style,
+	fontSize
+}) => {
 	const index = item.charCodeAt(0) % listColor.length;
 	return (
 		<BoxAvatar
 			listColor={listColor}
 			index={index}
+			height={height}
+			width={width}
+			style={style}
 			onClick={() => {
 				onClick && onClick();
 			}}>
@@ -17,7 +28,7 @@ const WebAvatar = ({ item, children, onClick }) => {
 				textAlign={"center"}
 				margin={"0"}
 				color={COLOR.WHITE_0}
-				fontSize={18}
+				fontSize={fontSize || 18}
 				fontWeight={"600"}>
 				{item}
 			</WebText>

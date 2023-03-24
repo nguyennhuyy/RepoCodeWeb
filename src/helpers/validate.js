@@ -33,3 +33,22 @@ export const REGISTER_FORM_SCHEME = Yup.object().shape({
 		"Passwords must match"
 	)
 });
+export const UPDATE_INFO_SCHEMA = Yup.object().shape({
+	avatar: Yup.string(),
+	fullname: Yup.string()
+		.matches(
+			/^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐa-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\d]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐa-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\d]*)*$/,
+			"Full name wrong format"
+		)
+		.min(6, "Full name must be more than 6 characters")
+		.max(100, "Full name must be less than 100 characters")
+		.required("Require full name"),
+	gender: Yup.string().required("Require gender"),
+	birthday: Yup.string()
+		.matches(
+			/^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/,
+			"Birthday wrong format"
+		)
+		.required("Require birthday"),
+	address: Yup.string().min(10).max(200).required("Require address")
+});

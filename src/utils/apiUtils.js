@@ -1,12 +1,13 @@
 import axios from "axios";
 const REQUEST_TIMEOUT = 60000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
+let getToken = localStorage.getItem("persist:auth");
+getToken = JSON.parse(getToken);
 export default class APIUtils {
-	accessToken = "";
+	accessToken = getToken?.token || "";
 	currentLanguage = "";
-
 	static setAccessToken(token) {
-		this.accessToken = `Bearer ${token}`;
+		this.accessToken = `${token}`;
 	}
 	static changeCurrentLanguage(value = "vn") {
 		this.currentLanguage = value;
@@ -79,20 +80,20 @@ export default class APIUtils {
 		return new Promise((resolve, reject) =>
 			axios
 				.post(`${URL_API}/${path}`, fd, {
-					Accept: "application/json",
 					headers: {
-						"Content-Type": "multipart/form-data",
-						Authorization: this.accessToken,
-						...headers
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${this.accessToken}`
 					}
 				})
 				.then(response => {
-					console.log(">>>>>>> Response>>>>>> : ", response);
-					const { data } = response;
-					resolve(data);
+					const { status } = response;
+					if (status == 200 || status == 201) {
+						return resolve(response.data);
+					} else {
+						return reject(response.data);
+					}
 				})
 				.catch(err => {
-					console.log("[error]", { err });
 					reject(err);
 				})
 		);

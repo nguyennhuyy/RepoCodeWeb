@@ -5,7 +5,7 @@ const useComponentVisible = initValue => {
 	const ref = useRef(null);
 	const handleClickOutside = event => {
 		if (ref.current && !ref.current.contains(event.target)) {
-			setIsComponentVisile(prev => !prev);
+			setIsComponentVisile(false);
 		}
 	};
 	useEffect(() => {
