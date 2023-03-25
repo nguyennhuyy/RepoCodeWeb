@@ -12,7 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import InputLabel from "@mui/material/InputLabel";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import moment from "moment";
@@ -42,7 +42,7 @@ const UserScreen = ({ onUpdate }) => {
 					</WebHeading>
 					<Formik
 						initialValues={{
-							avatar: avatar,
+							avatar: infoUser.avatar || avatar,
 							fullname: infoUser.fullname,
 							gender: infoUser.gender,
 							birthday: infoUser.birthday
