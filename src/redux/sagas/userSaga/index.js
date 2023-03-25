@@ -38,7 +38,7 @@ function* userUpdateSaga({ payload, type }) {
 						userInfo: result
 					})
 				);
-				console.log(">>> urlAvatar", result);
+				yield callback(result);
 			}
 		},
 		null,

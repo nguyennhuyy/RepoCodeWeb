@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import InputLabel from "@mui/material/InputLabel";
+import dayjs, { Dayjs } from "dayjs";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import moment from "moment";
@@ -41,11 +42,13 @@ const UserScreen = ({ onUpdate }) => {
 					</WebHeading>
 					<Formik
 						initialValues={{
-							avatar: "",
-							fullname: "",
-							gender: "",
-							birthday: "",
-							address: ""
+							avatar: avatar,
+							fullname: infoUser.fullname,
+							gender: infoUser.gender,
+							birthday: infoUser.birthday
+								? moment(infoUser.birthday).format("YYYY-MM-DD")
+								: moment(new Date()).format("YYYY-MM-DD"),
+							address: infoUser.address
 						}}
 						validationSchema={UPDATE_INFO_SCHEMA}
 						onSubmit={onUpdate}>
@@ -110,6 +113,15 @@ const UserScreen = ({ onUpdate }) => {
 											<PhotoCamera />
 										</IconButton>
 									</Stack>
+									{touched && errors && (
+										<WebText
+											margin={"0 0 10px 0"}
+											fontSize={12}
+											textAlign={"center"}
+											color={COLOR.RED_0}>
+											{errors.avatar}
+										</WebText>
+									)}
 									<WebInput
 										label={"Full name"}
 										styles={{
@@ -139,9 +151,8 @@ const UserScreen = ({ onUpdate }) => {
 											<MenuItem value={1}>Female</MenuItem>
 										</Select>
 									</FormControl>
-									{(!!touched || errors) && (
+									{touched && errors && (
 										<WebText
-											WebText
 											margin={"0 0 10px 0"}
 											fontSize={12}
 											color={COLOR.RED_0}>
@@ -156,17 +167,19 @@ const UserScreen = ({ onUpdate }) => {
 												color: COLOR.RGB_6,
 												marginBottom: "16px"
 											}}
+											format={"DD/MM/YYYY"}
+											defaultValue={dayjs(values.birthday)}
 											onChange={data => {
 												handleChange({
 													target: {
 														name: "birthday",
-														value: moment(data.$d).format("DD/MM/YYYY")
+														value: data.$d
 													}
 												});
 											}}
 										/>
 									</LocalizationProvider>
-									{(!!touched || errors) && (
+									{touched && errors && (
 										<WebText
 											WebText
 											margin={"0 0 10px 0"}

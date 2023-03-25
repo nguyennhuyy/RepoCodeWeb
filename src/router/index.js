@@ -15,13 +15,18 @@ const RootRouter = () => {
 		<Routes>
 			<Route path='/' element={<LayoutDefault />}>
 				<Route path='/' element={<PrivateRoute />}>
-					<Route path='/:id' element={<UserView />} />
+					<Route path='/user/:id' element={<UserView />} />
 				</Route>
 				<Route path='/dashboard' element={<HomeScreen />} />
 			</Route>
-			<Route path='/' element={<LayoutDefault />}>
-				<Route path='*' element={<HomeScreen />} />
-			</Route>
+			<Route
+				path='*'
+				element={
+					<LayoutDefault>
+						<HomeScreen />
+					</LayoutDefault>
+				}
+			/>
 			<Route path='/auth' element={<LayoutAuth />}>
 				<Route
 					path='login'

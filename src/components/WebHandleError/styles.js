@@ -6,3 +6,10 @@ export const BoxError = styled.div({
 	top: 0,
 	zIndex: 999
 });
+export const ContainerErr = styled.div({
+	maxWidth: 400,
+	height: 90,
+	borderRadius: 10,
+	display: "flex",
+	alignItems: "center"
+});

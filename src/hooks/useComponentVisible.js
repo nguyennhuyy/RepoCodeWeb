@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-
+import { useLocation } from "react-router-dom";
 const useComponentVisible = initValue => {
+	const location = useLocation();
 	const [isComponentVisible, setIsComponentVisile] = useState(initValue);
 	const ref = useRef(null);
 	const handleClickOutside = event => {
@@ -14,6 +15,9 @@ const useComponentVisible = initValue => {
 			document.removeEventListener("click", handleClickOutside, true);
 		};
 	}, []);
+	useEffect(() => {
+		setIsComponentVisile(false);
+	}, [location]);
 	return { ref, isComponentVisible, setIsComponentVisile };
 };
 
