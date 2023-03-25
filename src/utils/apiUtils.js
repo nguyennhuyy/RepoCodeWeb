@@ -33,7 +33,7 @@ export default class APIUtils {
 			try {
 				const response = await axios(request);
 				const { status } = response;
-				if (status == 200 || status == 201) {
+				if (status === 200 || status === 201) {
 					return resolve(response.data);
 				} else {
 					return reject(response.data);
@@ -61,7 +61,7 @@ export default class APIUtils {
 			try {
 				const response = await axios(request);
 				const { status } = response;
-				if (status == 200 || status == 201) {
+				if (status === 200 || status === 201) {
 					return resolve(response.data);
 				} else {
 					return reject(response.data);
@@ -87,7 +87,7 @@ export default class APIUtils {
 				})
 				.then(response => {
 					const { status } = response;
-					if (status == 200 || status == 201) {
+					if (status === 200 || status === 201) {
 						return resolve(response.data);
 					} else {
 						return reject(response.data);

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { useActions } from "~/hooks/useActions";
 import UserScreen from "./view";
 import { userUpdateInfoSubmit } from "~/redux/actions/userActions";
@@ -7,7 +7,6 @@ const UserView = () => {
 	const navigate = useNavigate();
 	const actions = useActions({ userUpdateInfoSubmit });
 	const handleUpdate = data => {
-		console.log(">>> data", data);
 		const opt = {
 			avatar: data.avatar,
 			fullname: data.fullname,
@@ -15,7 +14,9 @@ const UserView = () => {
 			gender: data.gender,
 			address: data.address,
 			callback: data => {
-				console.log(">>> data res", data);
+				if (data) {
+					navigate("/dashboard");
+				}
 			},
 			errorCb: () => {}
 		};

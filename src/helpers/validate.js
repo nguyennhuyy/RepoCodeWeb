@@ -34,7 +34,7 @@ export const REGISTER_FORM_SCHEME = Yup.object().shape({
 	)
 });
 export const UPDATE_INFO_SCHEMA = Yup.object().shape({
-	avatar: Yup.string(),
+	avatar: Yup.string().required("Require avatar"),
 	fullname: Yup.string()
 		.matches(
 			/^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐa-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\d]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐa-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\d]*)*$/,
@@ -44,11 +44,13 @@ export const UPDATE_INFO_SCHEMA = Yup.object().shape({
 		.max(100, "Full name must be less than 100 characters")
 		.required("Require full name"),
 	gender: Yup.string().required("Require gender"),
-	birthday: Yup.string()
-		.matches(
-			/^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/,
-			"Birthday wrong format"
-		)
+	birthday: Yup.date()
+		.test("birthday", "Should be greater than 18", function (value, ctx) {
+			const birthday = new Date(value);
+			const validDate = new Date();
+			const valid = validDate.getFullYear() - birthday.getFullYear() >= 18;
+			return !valid ? ctx.createError() : valid;
+		})
 		.required("Require birthday"),
 	address: Yup.string().min(10).max(200).required("Require address")
 });

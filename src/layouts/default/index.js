@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebAvatar from "~/components/WebAvatar";
@@ -62,7 +62,7 @@ const ModalInfo = forwardRef(
 								padding: "8px 0",
 								cursor: "pointer"
 							}}>
-							<Link to={`/${infoUser._id}`}> My Account</Link>
+							<Link to={`/user/${infoUser._id}`}> My Account</Link>
 						</WebText>
 						<WebText
 							fontSize={16}
@@ -142,16 +142,16 @@ const LayoutHeader = () => {
 							<ImageAvatar
 								src={infoUser.avatar}
 								onClick={() => {
-									setIsComponentVisile(true);
 									setToggleBox(prev => !prev);
+									setIsComponentVisile(true);
 								}}
 							/>
 						) : (
 							<WebAvatar
 								item={getAvatarName(infoUser)}
 								onClick={() => {
-									setIsComponentVisile(true);
 									setToggleBox(prev => !prev);
+									setIsComponentVisile(true);
 								}}></WebAvatar>
 						)}
 						{toggleBox && (
@@ -223,12 +223,13 @@ const LayoutBottom = () => {
 	);
 };
 
-const LayoutDefault = () => {
+const LayoutDefault = ({ children }) => {
 	return (
 		<Wrapper>
 			<LayoutHeader />
 			<BoxOutLet>
 				<Outlet />
+				{children}
 			</BoxOutLet>
 			<LayoutBottom />
 		</Wrapper>
