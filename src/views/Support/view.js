@@ -6,7 +6,7 @@ import WebText from "~/components/WebText";
 import { SUPPORT_CONTACT_SCHEMA } from "~/helpers/validate";
 import { COLOR } from "~/utils/appConst";
 import { HeaderQuestion, BoxForm, ItemForm, FormData } from "./styles";
-const SupportView = () => {
+const SupportView = ({ onSupport }) => {
 	return (
 		<>
 			<HeaderQuestion>
@@ -29,6 +29,7 @@ const SupportView = () => {
 							subject: "",
 							message: ""
 						}}
+						onSubmit={onSupport}
 						validationSchema={SUPPORT_CONTACT_SCHEMA}>
 						{({ errors, touched, values, handleChange, handleSubmit }) => {
 							return (
@@ -47,6 +48,7 @@ const SupportView = () => {
 										error={errors && touched}
 										messageError={errors.email}
 										value={values.email}
+										onChange={handleChange("email")}
 									/>
 									<WebInput
 										label='Subject*'
@@ -56,6 +58,7 @@ const SupportView = () => {
 										error={errors && touched}
 										messageError={errors.subject}
 										value={values.subject}
+										onChange={handleChange("subject")}
 									/>
 									<WebInput
 										label='Message*'
@@ -67,6 +70,7 @@ const SupportView = () => {
 										error={errors && touched}
 										messageError={errors.message}
 										value={values.message}
+										onChange={handleChange("message")}
 									/>
 									<Button
 										variant='contained'

@@ -1,18 +1,24 @@
-import { put, takeLatest, call } from "redux-saga/effects";
-import { USER } from "~/redux/actionsType";
+import { takeLatest, call } from "redux-saga/effects";
+import { OTHER } from "~/redux/actionsType";
 import { invoke } from "~/helpers/sagas";
-import { userUpload, userUpdateInfo } from "~/redux/api/userApis";
+import { contactSupportApi } from "~/redux/api/otherApis";
 export default function* otherSaga() {
-	yield takeLatest(USER.USER_UPDATE.HANDLER, otherSupportSaga);
+	yield takeLatest(OTHER.OTHER_SUPPORT.HANDLER, otherSupportSaga);
 }
 function* otherSupportSaga({ payload, type }) {
 	const {
 		showLoading = true,
+		email,
+		subject,
+		message,
 		callback = () => {},
 		errorCb = () => {}
 	} = payload || {};
 	yield invoke(
-		function* execution() {},
+		function* execution() {
+			const result = yield call(contactSupportApi, email, subject, message);
+			yield callback(result);
+		},
 		null,
 		showLoading,
 		type,
