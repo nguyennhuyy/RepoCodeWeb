@@ -54,3 +54,19 @@ export const UPDATE_INFO_SCHEMA = Yup.object().shape({
 		.required("Require birthday"),
 	address: Yup.string().min(10).max(200).required("Require address")
 });
+export const SUPPORT_CONTACT_SCHEMA = Yup.object().shape({
+	email: Yup.string()
+		.matches(
+			/^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/gm,
+			"Email is not valid"
+		)
+		.required("Require email"),
+	subject: Yup.string()
+		.min(6, "Subject must be more than 6 characters")
+		.max(100, "Subject must be less than 100 characters")
+		.required("Require Subject"),
+	message: Yup.string()
+		.min(6, "Message must be more than 6 characters")
+		.max(100, "Message must be less than 500 characters")
+		.required("Require Message")
+});

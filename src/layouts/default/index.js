@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebAvatar from "~/components/WebAvatar";
@@ -170,6 +170,7 @@ const LayoutHeader = () => {
 	);
 };
 const LayoutBottom = () => {
+	const navigate = useNavigate();
 	return (
 		<BoxBottom>
 			<ItemBottom>
@@ -203,9 +204,9 @@ const LayoutBottom = () => {
 								Cookies Policy
 							</WebText>
 						</ItemList>
-						<ItemList>
+						<ItemList onClick={() => navigate("/support/contact")}>
 							<WebText color={COLOR.WHITE_0} fontSize={16}>
-								Imprint
+								Contact Us
 							</WebText>
 						</ItemList>
 					</ListBottom>

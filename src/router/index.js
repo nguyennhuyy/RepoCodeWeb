@@ -1,4 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
+import useSelectorShallow from "~/hooks/useSelectorShallow";
+import { getTokenSelector } from "~/redux/selectors/userSelector";
 import LayoutAuth from "~/layouts/auth";
 import LayoutDefault from "~/layouts/default";
 import Login from "~/views/Auth/Login";
@@ -6,9 +8,7 @@ import Register from "~/views/Auth/Register";
 import HomeScreen from "~/views/Home/views";
 import UserView from "~/views/User";
 import PrivateRoute from "./PrivateRoute";
-
-import useSelectorShallow from "~/hooks/useSelectorShallow";
-import { getTokenSelector } from "~/redux/selectors/userSelector";
+import SupportScreen from "~/views/Support";
 const RootRouter = () => {
 	const token = useSelectorShallow(getTokenSelector);
 	return (
@@ -25,6 +25,14 @@ const RootRouter = () => {
 				element={
 					<LayoutDefault>
 						<HomeScreen />
+					</LayoutDefault>
+				}
+			/>
+			<Route
+				path='/support/contact'
+				element={
+					<LayoutDefault>
+						<SupportScreen />
 					</LayoutDefault>
 				}
 			/>

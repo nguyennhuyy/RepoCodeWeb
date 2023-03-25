@@ -36,3 +36,6 @@ export const USER = {
 export const ERROR = {
 	ERROR_DISPATCH: asyncTypes("ERROR_ERROR_DISPATCH")
 };
+export const OTHER = {
+	OTHER_SUPPORT: asyncTypes("OTHER_SUPPORT")
+};
