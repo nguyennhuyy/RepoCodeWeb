@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import GlobalStyle, { theme } from "~/components/WebGlobalStyle";
 import GlobalFonts from "~/assets/fonts/fonts";
 import { ThemeProvider } from "@mui/material";
+import ScrollToTop from "./helpers/scrollToTop";
 const storeConfig = configureStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,6 +19,7 @@ root.render(
 					<GlobalStyle />
 					<GlobalFonts />
 					<ThemeProvider theme={theme}>
+						<ScrollToTop />
 						<App />
 					</ThemeProvider>
 				</BrowserRouter>

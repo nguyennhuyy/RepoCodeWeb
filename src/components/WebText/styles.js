@@ -10,5 +10,6 @@ export const Text = styled.p(props => ({
 	a: {
 		color: props.colorLink || COLOR.BLACK_1,
 		textDecoration: "none"
-	}
+	},
+	...props.style
 }));

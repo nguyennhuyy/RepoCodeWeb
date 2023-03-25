@@ -21,11 +21,13 @@ const LoginView = () => {
 			remember: data.remember,
 			callback: data => {
 				if (data) {
-					navigate("/");
+					navigate("/dashboard");
 				}
 			},
 			errorCb: data => {
-				setDataError(data.data);
+				if (data) {
+					setDataError(data?.data);
+				}
 			}
 		};
 		actions.signInSubmit({ ...opt });

@@ -17,7 +17,9 @@ const LayoutHeader = () => {
 	return (
 		<Header>
 			<Left>
-				<Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
+				<Link
+					to={"/dashboard"}
+					style={{ display: "flex", alignItems: "center" }}>
 					<Logo />
 				</Link>
 			</Left>

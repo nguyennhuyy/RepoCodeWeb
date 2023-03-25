@@ -1,12 +1,13 @@
 import axios from "axios";
 const REQUEST_TIMEOUT = 60000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
+let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+let tokens = getToken.token;
 export default class APIUtils {
-	accessToken = "";
+	accessToken = tokens || "";
 	currentLanguage = "";
-
 	static setAccessToken(token) {
-		this.accessToken = `Bearer ${token}`;
+		this.accessToken = `${token}`;
 	}
 	static changeCurrentLanguage(value = "vn") {
 		this.currentLanguage = value;
@@ -24,7 +25,9 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.accessToken}`
+					authorization: `Bearer ${
+						this.accessToken || tokens.slice(1, tokens.length - 1)
+					}`
 				}
 			};
 			try {
@@ -49,7 +52,9 @@ export default class APIUtils {
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.accessToken}`
+					authorization: `Bearer ${
+						this.accessToken || tokens.slice(1, tokens.length - 1)
+					}`
 				},
 				data: JSON.stringify(postData)
 			};
@@ -69,30 +74,26 @@ export default class APIUtils {
 
 	static uploadFile(path, file, name, headers) {
 		var fd = new FormData();
-		var newFile = {
-			...file,
-			name: file.filename || file.fileName || "my_photo.jpg",
-			type: file.type || "image/jpeg"
-		};
-		fd.append(name, newFile);
-
+		fd.append(name, file);
 		return new Promise((resolve, reject) =>
 			axios
 				.post(`${URL_API}/${path}`, fd, {
-					Accept: "application/json",
 					headers: {
 						"Content-Type": "multipart/form-data",
-						Authorization: this.accessToken,
-						...headers
+						authorization: `Bearer ${
+							this.accessToken || tokens.slice(1, tokens.length - 1)
+						}`
 					}
 				})
 				.then(response => {
-					console.log(">>>>>>> Response>>>>>> : ", response);
-					const { data } = response;
-					resolve(data);
+					const { status } = response;
+					if (status == 200 || status == 201) {
+						return resolve(response.data);
+					} else {
+						return reject(response.data);
+					}
 				})
 				.catch(err => {
-					console.log("[error]", { err });
 					reject(err);
 				})
 		);

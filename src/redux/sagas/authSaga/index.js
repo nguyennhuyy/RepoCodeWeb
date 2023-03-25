@@ -33,6 +33,7 @@ function* signInSaga({ payload, type }) {
 			const result = yield call(signInApi, email, password, remember);
 			if (result.token) {
 				yield APIUtils.setAccessToken(result.token);
+
 				yield put(
 					signInSuccess({
 						userInfo: result,
@@ -46,7 +47,7 @@ function* signInSaga({ payload, type }) {
 		showLoading,
 		type,
 		function* callbackError(err) {
-			yield errorCb(err.response);
+			yield errorCb(err?.response);
 		}
 	);
 }

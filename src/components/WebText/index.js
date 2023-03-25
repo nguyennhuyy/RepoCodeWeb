@@ -7,16 +7,22 @@ const WebText = ({
 	color,
 	margin,
 	textAlign,
-	colorLink
+	colorLink,
+	style,
+	onClick
 }) => {
 	return (
 		<Text
+			onClick={() => {
+				onClick && onClick();
+			}}
 			fontSize={fontSize}
 			fontWeight={fontWeight}
 			color={color}
 			margin={margin}
 			textAlign={textAlign}
-			colorLink={colorLink}>
+			colorLink={colorLink}
+			style={style}>
 			{children}
 		</Text>
 	);

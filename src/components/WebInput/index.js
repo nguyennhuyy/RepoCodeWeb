@@ -10,7 +10,9 @@ const WebInput = ({
 	error,
 	messageError,
 	styles,
-	touched
+	touched,
+	multiline,
+	rows
 }) => {
 	return (
 		<>
@@ -21,6 +23,8 @@ const WebInput = ({
 				type={type}
 				onChange={e => onChange(e.target.value)}
 				sx={styles}
+				multiline={multiline}
+				rows={rows}
 			/>
 			{(!!touched || error) && (
 				<WebText
