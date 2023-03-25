@@ -13,6 +13,7 @@ const RootRouter = () => {
 	const token = useSelectorShallow(getTokenSelector);
 	return (
 		<Routes>
+			<Route path='/' element={<Navigate to={"/dashboard"} />} />
 			<Route path='/' element={<LayoutDefault />}>
 				<Route path='/' element={<PrivateRoute />}>
 					<Route path='/user/:id' element={<UserView />} />
