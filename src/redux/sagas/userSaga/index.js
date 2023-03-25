@@ -23,23 +23,24 @@ function* userUpdateSaga({ payload, type }) {
 	} = payload || {};
 	yield invoke(
 		function* execution() {
-			const urlAvatar = yield call(userUpload, avatar);
-			if (urlAvatar) {
-				const result = yield call(
-					userUpdateInfo,
-					urlAvatar.image,
-					fullname,
-					birthday,
-					gender,
-					address
-				);
-				yield put(
-					signInUpdate({
-						userInfo: result
-					})
-				);
-				yield callback(result);
+			let urlAvatar;
+			if (typeof avatar !== "string") {
+				urlAvatar = yield call(userUpload, avatar);
 			}
+			const result = yield call(
+				userUpdateInfo,
+				urlAvatar?.image || avatar,
+				fullname,
+				birthday,
+				gender,
+				address
+			);
+			yield put(
+				signInUpdate({
+					userInfo: result
+				})
+			);
+			yield callback(result);
 		},
 		null,
 		showLoading,
