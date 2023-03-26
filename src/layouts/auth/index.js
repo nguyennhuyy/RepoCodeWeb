@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
-import { Language, Logo } from "~/assets/path";
+import { Logo } from "~/assets/path";
 import WebText from "~/components/WebText";
 import { COLOR } from "~/utils/appConst";
 import {

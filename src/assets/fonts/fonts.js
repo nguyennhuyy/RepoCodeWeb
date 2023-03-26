@@ -1,4 +1,4 @@
-import { css, createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import PoppinsThin from "./Poppins-Thin.ttf";
 import PoppinsExtraLight from "./Poppins-ExtraLight.ttf";
 import PoppinsLight from "./Poppins-Light.ttf";

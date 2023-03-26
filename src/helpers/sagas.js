@@ -1,6 +1,5 @@
-import { put, select } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import { signOutSubmit } from "~/redux/actions/authActions";
-import { errorDispatchSubmit } from "~/redux/actions/errorActions";
 import {
 	onFetching,
 	nonFetching,

@@ -12,7 +12,7 @@ const LoginView = () => {
 	const actions = useActions({
 		signInSubmit
 	});
-	const [dataError, setDataError] = useState();
+	const [dataError, setDataError] = useState("");
 	const [messageError, setMessageError] = useState();
 	const onSubmiLogin = data => {
 		const opt = {
@@ -32,20 +32,21 @@ const LoginView = () => {
 		};
 		actions.signInSubmit({ ...opt });
 	};
-	const handleError = () => {
-		switch (dataError?.error ? dataError?.error : dataError) {
-			case DATA_ERROR.USER_NOT_FOUND:
-				setMessageError("User not found");
-				break;
-			case DATA_ERROR.USER_INCORRECT_PASS:
-				setMessageError("User incorrect password");
-				break;
-			default:
-				setMessageError("");
-				break;
-		}
-	};
+
 	useEffect(() => {
+		const handleError = () => {
+			switch (dataError?.error ? dataError?.error : dataError) {
+				case DATA_ERROR.USER_NOT_FOUND:
+					setMessageError("User not found");
+					break;
+				case DATA_ERROR.USER_INCORRECT_PASS:
+					setMessageError("User incorrect password");
+					break;
+				default:
+					setMessageError("");
+					break;
+			}
+		};
 		handleError();
 	}, [dataError]);
 	return <LoginScreen onLogin={onSubmiLogin} messageError={messageError} />;

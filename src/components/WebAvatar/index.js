@@ -37,4 +37,4 @@ const WebAvatar = ({
 	);
 };
 
-export default React.memo(WebAvatar);
+export default memo(WebAvatar);

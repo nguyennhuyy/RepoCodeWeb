@@ -33,17 +33,18 @@ const RegisterView = () => {
 
 		actions.signUpSubmit({ ...opt });
 	};
-	const handleError = () => {
-		switch (dataError?.error ? dataError?.error : dataError) {
-			case DATA_ERROR.USER_EXIST:
-				setMessageError("User exists");
-				break;
-			default:
-				setMessageError("");
-				break;
-		}
-	};
+
 	useEffect(() => {
+		const handleError = () => {
+			switch (dataError?.error ? dataError?.error : dataError) {
+				case DATA_ERROR.USER_EXIST:
+					setMessageError("User exists");
+					break;
+				default:
+					setMessageError("");
+					break;
+			}
+		};
 		handleError();
 	}, [dataError]);
 

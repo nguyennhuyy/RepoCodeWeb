@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebAvatar from "~/components/WebAvatar";
@@ -35,68 +35,71 @@ import {
 	ImageAvatar,
 	BoxModalInfo
 } from "./styles";
-const ModalInfo = forwardRef(
-	({ logOutFunc, fullname, isComponentVisible, infoUser }, ref) => {
-		return (
-			<div ref={ref}>
-				{isComponentVisible && (
-					<BoxModalInfo>
-						<WebText
-							fontSize={16}
-							fontWeight={500}
-							margin={0}
-							style={{
-								margin: 0,
-								padding: "8px 0",
-								cursor: "default"
-							}}>
-							{fullname}
-						</WebText>
-						<WebText
-							fontSize={16}
-							style={{
-								":hover": {
-									color: COLOR.RGB_4
-								},
-								margin: 0,
-								padding: "8px 0",
-								cursor: "pointer"
-							}}>
-							<Link to={`/user/${infoUser._id}`}> My Account</Link>
-						</WebText>
-						<WebText
-							fontSize={16}
-							style={{
-								":hover": {
-									color: COLOR.RGB_4
-								},
-								margin: 0,
-								padding: "8px 0",
-								cursor: "pointer"
-							}}
-							onClick={logOutFunc}>
-							Logout
-						</WebText>
-					</BoxModalInfo>
-				)}
-			</div>
-		);
-	}
-);
+const ModalInfo = ({ logOutFunc, fullname, infoUser }) => {
+	return (
+		<BoxModalInfo>
+			<WebText
+				fontSize={16}
+				fontWeight={500}
+				margin={0}
+				style={{
+					margin: 0,
+					padding: "8px 0",
+					cursor: "default"
+				}}>
+				{fullname}
+			</WebText>
+			<WebText
+				fontSize={16}
+				style={{
+					":hover": {
+						color: COLOR.RGB_4
+					},
+					margin: 0,
+					padding: "8px 0",
+					cursor: "pointer"
+				}}>
+				<Link to={`/user/${infoUser._id}`}> My Account</Link>
+			</WebText>
+			<WebText
+				fontSize={16}
+				style={{
+					":hover": {
+						color: COLOR.RGB_4
+					},
+					margin: 0,
+					padding: "8px 0",
+					cursor: "pointer"
+				}}
+				onClick={logOutFunc}>
+				Logout
+			</WebText>
+		</BoxModalInfo>
+	);
+};
 const LayoutHeader = () => {
 	const infoUser = useSelectorShallow(getUserInfoSelector);
 	const token = useSelectorShallow(getTokenSelector);
 	const [toggleBox, setToggleBox] = useState(false);
-	const { ref, isComponentVisible, setIsComponentVisile } =
-		useComponentVisible(false);
+	const menuRef = useRef();
 	const actions = useActions({
 		signOutSubmit
 	});
 	const navigate = useNavigate();
 	const logOutFunc = () => {
 		actions.signOutSubmit();
-		navigate("/login");
+		navigate("/auth/login");
 	};
+
+	useEffect(() => {
+		let handleCloseOutside = e => {
+			if (!menuRef.current.contains(e.target)) {
+				setToggleBox(false);
+			}
+		};
+		document.addEventListener("mousedown", handleCloseOutside);
+		return () => document.addEventListener("mousedown", handleCloseOutside);
+	});
 	return (
 		<Header>
 			<Left>
@@ -142,26 +145,24 @@ const LayoutHeader = () => {
 							<ImageAvatar
 								src={infoUser.avatar}
 								onClick={() => {
-									setToggleBox(prev => !prev);
-									setIsComponentVisile(true);
+									setToggleBox(!toggleBox);
 								}}
 							/>
 						) : (
 							<WebAvatar
 								item={getAvatarName(infoUser)}
 								onClick={() => {
-									setToggleBox(prev => !prev);
-									setIsComponentVisile(true);
+									setToggleBox(!toggleBox);
 								}}></WebAvatar>
 						)}
 						{toggleBox && (
-							<ModalInfo
-								logOutFunc={logOutFunc}
-								fullname={infoUser.fullname}
-								ref={ref}
-								isComponentVisible={isComponentVisible}
-								infoUser={infoUser}
-							/>
+							<div ref={menuRef}>
+								<ModalInfo
+									logOutFunc={logOutFunc}
+									fullname={infoUser.fullname}
+									infoUser={infoUser}
+								/>
+							</div>
 						)}
 					</ItemAvatar>
 				</>

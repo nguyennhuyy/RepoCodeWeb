@@ -7,7 +7,6 @@ import { Container, BoxForm, CardShadow } from "./styles";
 import { Formik } from "formik";
 import { UPDATE_INFO_SCHEMA } from "~/helpers/validate";
 import WebInput from "~/components/WebInput";
-import WebError from "~/components/WebError";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

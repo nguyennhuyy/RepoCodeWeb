@@ -83,21 +83,23 @@ const LoginSocial = () => {
 				setDataError(errorMessage);
 			});
 	};
-	const handleError = () => {
-		switch (dataError?.error ? dataError?.error : dataError) {
-			case DATA_ERROR.GOOGLE_LOGIN_FAILED:
-				setMessageError("Login Google Failed");
-				break;
-			case DATA_ERROR.FACEBOOK_LOGIN_FAILED:
-				setMessageError("Login Facebook Failed");
-				break;
-			case DATA_ERROR.SOCIAL_ACCOUNT_EXISTS:
-				setMessageError("Login Social Failed");
-			default:
-				break;
-		}
-	};
+
 	useEffect(() => {
+		const handleError = () => {
+			switch (dataError?.error ? dataError?.error : dataError) {
+				case DATA_ERROR.GOOGLE_LOGIN_FAILED:
+					setMessageError("Login Google Failed");
+					break;
+				case DATA_ERROR.FACEBOOK_LOGIN_FAILED:
+					setMessageError("Login Facebook Failed");
+					break;
+				case DATA_ERROR.SOCIAL_ACCOUNT_EXISTS:
+					setMessageError("Login Social Failed");
+					break;
+				default:
+					return;
+			}
+		};
 		handleError();
 	}, [dataError]);
 	return (
