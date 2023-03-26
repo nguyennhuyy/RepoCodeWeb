@@ -12,18 +12,16 @@ import ScrollToTop from "./helpers/scrollToTop";
 const storeConfig = configureStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
-		<Provider store={storeConfig.store}>
-			<PersistGate loading={null} persistor={storeConfig.persistor}>
-				<BrowserRouter>
-					<GlobalStyle />
-					<GlobalFonts />
-					<ThemeProvider theme={theme}>
-						<ScrollToTop />
-						<App />
-					</ThemeProvider>
-				</BrowserRouter>
-			</PersistGate>
-		</Provider>
-	</React.StrictMode>
+	<Provider store={storeConfig.store}>
+		<PersistGate loading={null} persistor={storeConfig.persistor}>
+			<BrowserRouter>
+				<GlobalStyle />
+				<GlobalFonts />
+				<ThemeProvider theme={theme}>
+					<ScrollToTop />
+					<App />
+				</ThemeProvider>
+			</BrowserRouter>
+		</PersistGate>
+	</Provider>
 );
