@@ -2,7 +2,7 @@ import axios from "axios";
 const REQUEST_TIMEOUT = 60000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
 let getToken = JSON.parse(localStorage.getItem("persist:auth"));
-let tokens = getToken.token;
+let tokens = getToken?.token;
 export default class APIUtils {
 	accessToken = tokens || "";
 	currentLanguage = "";

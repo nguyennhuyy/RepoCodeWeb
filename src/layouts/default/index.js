@@ -141,7 +141,7 @@ const LayoutHeader = () => {
 			) : (
 				<>
 					<ItemAvatar>
-						{infoUser.avatar ? (
+						{infoUser?.avatar ? (
 							<ImageAvatar
 								src={infoUser.avatar}
 								onClick={() => {
