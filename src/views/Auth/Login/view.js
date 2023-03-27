@@ -33,7 +33,9 @@ const LoginScreen = ({ onLogin, messageError }) => {
 				</WebHeading>
 				<WebText textAlign={"center"} fontSize={16} margin={"0 0 16px 0"}>
 					or create a
-					<Link to='/register' style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
+					<Link
+						to='/auth/register'
+						style={{ color: COLOR.BLUE_0, margin: "0 3px" }}>
 						new account
 					</Link>
 					for free

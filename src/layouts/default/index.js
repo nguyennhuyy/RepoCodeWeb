@@ -1,11 +1,4 @@
-import {
-	forwardRef,
-	memo,
-	useCallback,
-	useEffect,
-	useRef,
-	useState
-} from "react";
+import { forwardRef, memo, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Language, Logo } from "~/assets/path";
 import WebAvatar from "~/components/WebAvatar";
@@ -97,10 +90,10 @@ const LayoutHeader = ({ infoUser, token, navigate }) => {
 	const actions = useActions({
 		signOutSubmit
 	});
-	const logOutFunc = useCallback(() => {
+	const logOutFunc = () => {
 		actions.signOutSubmit();
 		navigate("/auth/login");
-	}, []);
+	};
 
 	useEffect(() => {
 		let handleCloseOutside = e => {

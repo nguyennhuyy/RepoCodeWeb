@@ -26,9 +26,6 @@ export function* invoke(
 	} catch (error) {
 		console.info(`Saga Invoke Error [${actionType}]>>>>>`, error);
 		yield put(nonFetching(actionType));
-		if (showDialog) {
-			yield put(hideLoading(actionType));
-		}
 		if (error?.response?.status === 401) {
 			yield put(signOutSubmit(actionType));
 		}
