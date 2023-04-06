@@ -15,5 +15,7 @@ export const COLOR = {
 	BLUE_0: "#0F70E6",
 	RED_0: "#DB2C6F",
 	PINK_0: "#fef0f0",
-	PINK_1: "#F56C6C"
+	PINK_1: "#F56C6C",
+	GREEN_0: "#009933",
+	YELLOW_0: "#ffcc00"
 };

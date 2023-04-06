@@ -9,6 +9,8 @@ const UploadView = () => {
 	const actions = useActions({ mediaRemoveBackgroundSubmit });
 	const [imageOrigin, setImageOrigin] = useState();
 	const [imageRemoved, setImageRemoved] = useState();
+	const [activeAlert, setActiveAlert] = useState(false);
+	const [descriptionAlert, setDescriptionAlert] = useState();
 	const onRemoveBg = data => {
 		let opt = {
 			data: data.imageRemove,
@@ -17,7 +19,12 @@ const UploadView = () => {
 				setImageRemoved(result.base64img);
 				setImageOrigin(origin);
 			},
-			errorCb: res => {}
+			errorCb: res => {
+				if (res) {
+					setActiveAlert(true);
+					setDescriptionAlert("Remove faulty background");
+				}
+			}
 		};
 
 		actions.mediaRemoveBackgroundSubmit({ ...opt });
@@ -29,12 +36,20 @@ const UploadView = () => {
 			setImageOrigin("");
 		}
 	};
+	const callbackSetActiveAlert = data => {
+		if (data) {
+			setActiveAlert(false);
+		}
+	};
 	return (
 		<UploadScreen
 			onRemoveBg={onRemoveBg}
 			imageOrigin={imageOrigin}
 			imageRemoved={imageRemoved}
 			callbackRefreshData={callbackRefreshData}
+			activeAlert={activeAlert}
+			descriptionAlert={descriptionAlert}
+			callbackSetActiveAlert={callbackSetActiveAlert}
 		/>
 	);
 };
