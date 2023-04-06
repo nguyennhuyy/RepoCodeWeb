@@ -72,6 +72,7 @@ import PictureGraphicOrg from "~/assets/images/PictureGraphicOrg.jpg";
 import PictureGraphicTrans from "~/assets/images/PictureGraphicTrans.jpg";
 import PictureGraphicNew from "~/assets/images/PictureGraphicNew.png";
 import PictureGraphicAndless from "~/assets/images/PictureGraphicAndless.png";
+import { useNavigate } from "react-router-dom";
 const LIST_STUNNING = [
 	{
 		id: 1,
@@ -245,6 +246,7 @@ const LIST_PICTURE_IMAGE = [
 const HomeScreen = () => {
 	const [isActive, setIsActive] = useState(1);
 	const [isRender, setIsRender] = useState(TYPE_RENDER.PEOPLE);
+	const navigate = useNavigate();
 	const [isActivePicture, setIsActivePicture] = useState(1);
 	const [isRenderPicture, setIsRenderPicture] = useState(
 		TYPE_RENDER_PICTURE.PEOPLE
@@ -435,6 +437,7 @@ const HomeScreen = () => {
 					<BannerRight>
 						<BoxUpload>
 							<Button
+								onClick={() => navigate("/upload")}
 								variant='contained'
 								sx={{
 									borderRadius: 9999,

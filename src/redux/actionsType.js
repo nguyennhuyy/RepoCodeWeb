@@ -39,3 +39,6 @@ export const ERROR = {
 export const OTHER = {
 	OTHER_SUPPORT: asyncTypes("OTHER_SUPPORT")
 };
+export const MEDIA = {
+	MEDIA_REMOVE_BG: asyncTypes("MEDIA_REMOVE_BG")
+};

@@ -7,5 +7,6 @@ export const Heading = styled.h2(props => ({
 	color: props.color || COLOR.BLACK_1,
 	margin: props.margin || 16,
 	height: "max-content",
-	textAlign: props.textAlign || "left"
+	textAlign: props.textAlign || "left",
+	...props.style
 }));

@@ -6,7 +6,8 @@ const WebHeading = ({
 	fontWeight,
 	color,
 	margin,
-	textAlign
+	textAlign,
+	styles
 }) => {
 	return (
 		<Heading
@@ -14,7 +15,8 @@ const WebHeading = ({
 			fontWeight={fontWeight}
 			color={color}
 			margin={margin}
-			textAlign={textAlign}>
+			textAlign={textAlign}
+			style={styles}>
 			{children}
 		</Heading>
 	);

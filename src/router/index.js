@@ -9,6 +9,7 @@ import HomeScreen from "~/views/Home/views";
 import UserView from "~/views/User";
 import PrivateRoute from "./PrivateRoute";
 import SupportScreen from "~/views/Support";
+import UploadScreen from "~/views/Upload";
 const RootRouter = () => {
 	const token = useSelectorShallow(getTokenSelector);
 	return (
@@ -17,6 +18,7 @@ const RootRouter = () => {
 			<Route path='/' element={<LayoutDefault />}>
 				<Route path='/' element={<PrivateRoute />}>
 					<Route path='/user/:id' element={<UserView />} />
+					<Route path='/upload' element={<UploadScreen />} />
 				</Route>
 				<Route path='/dashboard' element={<HomeScreen />} />
 			</Route>

@@ -163,4 +163,48 @@ const IconClose = () => {
 		</svg>
 	);
 };
-export { Logo, Language, DecoBrush, Facebook, Google, IconClose };
+const LogoOrigin = () => {
+	return (
+		<svg
+			className='d-inline'
+			xmlns='http://www.w3.org/2000/svg'
+			viewBox='0 0 22 16'
+			height='16mm'
+			width='22mm'>
+			<path
+				d='M.787 6.411l10.012 5.222a.437.437 0 0 0 .402 0l10.01-5.222a.434.434 0 0 0 .186-.585.45.45 0 0 0-.186-.187L11.2.417a.441.441 0 0 0-.404 0L.787 5.639a.439.439 0 0 0-.184.588.453.453 0 0 0 .184.184z'
+				fill='#DDDFE1'></path>
+			<path
+				d='M21.21 9.589l-1.655-.864-7.953 4.148a1.31 1.31 0 0 1-1.202 0L2.444 8.725l-1.657.864a.437.437 0 0 0-.184.583.427.427 0 0 0 .184.187l10.012 5.224a.437.437 0 0 0 .402 0l10.01-5.224a.434.434 0 0 0 .186-.586.444.444 0 0 0-.186-.184z'
+				fill='#EDEFF0'></path>
+		</svg>
+	);
+};
+const IconClosePopup = ({ width = "30px", height = "30px" }) => {
+	return (
+		<svg
+			width={width}
+			height={height}
+			viewBox='0 0 30 30'
+			fill='none'
+			xmlns='http://www.w3.org/2000/svg'>
+			<path
+				d='M11.4625 18.5375L18.5375 11.4625M18.5375 18.5375L11.4625 11.4625M15 27.5C21.875 27.5 27.5 21.875 27.5 15C27.5 8.125 21.875 2.5 15 2.5C8.125 2.5 2.5 8.125 2.5 15C2.5 21.875 8.125 27.5 15 27.5Z'
+				stroke='black'
+				strokeWidth='1.5'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+		</svg>
+	);
+};
+export {
+	Logo,
+	Language,
+	DecoBrush,
+	Facebook,
+	Google,
+	IconClose,
+	LogoOrigin,
+	IconClosePopup
+};
