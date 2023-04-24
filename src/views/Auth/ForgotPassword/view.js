@@ -1,26 +1,14 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import WebHeading from "~/components/WebHeading";
 import WebText from "~/components/WebText";
 import { COLOR } from "~/utils/appConst";
-import {
-  Container,
-  BoxTop,
-  BoxForm,
-  CardShadow,
-  DivOr,
-  ItemOr,
-  FormSubmit,
-} from "./styles";
-import LoginSocial from "../LoginSocial/LoginSocial";
+import { Container, BoxTop, BoxForm, CardShadow, FormSubmit } from "./styles";
 import { Formik } from "formik";
-import { LOGIN_FORM_SCHEME } from "~/helpers/validate";
+import { FORGOT_FORM_SCHEME } from "~/helpers/validate";
 import WebInput from "~/components/WebInput";
 import WebError from "~/components/WebError";
-const LoginScreen = ({ onLogin, messageError }) => {
+const ForgotPasswordScreen = ({ onForgot, messageError }) => {
   return (
     <Container>
       <BoxTop>
@@ -30,47 +18,22 @@ const LoginScreen = ({ onLogin, messageError }) => {
           textAlign={"center"}
           margin={"0 0 0 0"}
         >
-          Login with your Account
+          Forgot your password?
         </WebHeading>
-        <WebText textAlign={"center"} fontSize={16} margin={"0 0 16px 0"}>
-          or create a
-          <Link
-            to="/auth/register"
-            style={{ color: COLOR.BLUE_0, margin: "0 3px" }}
-          >
-            new account
-          </Link>
-          for free
-        </WebText>
       </BoxTop>
       <BoxForm>
         <CardShadow>
-          <WebHeading
-            fontSize={26}
-            textAlign={"center"}
-            fontWeight={500}
-            margin={"0 0 20px 0"}
-          >
-            Login
-          </WebHeading>
-          <LoginSocial />
-          <DivOr>
-            <ItemOr></ItemOr>
-            <WebText margin={"0 10px 0 10px"} fontSize={16}>
-              or
-            </WebText>
-            <ItemOr></ItemOr>
-          </DivOr>
+          <WebText fontSize={18} fontWeight={500} margin={"10px 0 20px 0"}>
+            Fear not. We’ll email you instructions to reset your password.
+          </WebText>
           <WebError error={messageError} />
 
           <Formik
             initialValues={{
               email: "",
-              password: "",
-              remember: true,
             }}
-            validationSchema={LOGIN_FORM_SCHEME}
-            onSubmit={onLogin}
+            validationSchema={FORGOT_FORM_SCHEME}
+            onSubmit={onForgot}
           >
             {({ values, handleChange, handleSubmit, errors, touched }) => (
               <FormSubmit>
@@ -86,31 +49,7 @@ const LoginScreen = ({ onLogin, messageError }) => {
                   touched={touched.email}
                   messageError={errors.email}
                 />
-                <WebInput
-                  label={"Password"}
-                  styles={{
-                    width: "100%",
-                    marginBottom: "16px",
-                  }}
-                  type={"password"}
-                  value={values.password}
-                  touched={touched.password}
-                  onChange={handleChange("password")}
-                  messageError={errors.password}
-                />
 
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        defaultChecked
-                        onChange={handleChange("remember")}
-                      />
-                    }
-                    label="Remember"
-                    value={values.remember}
-                  />
-                </FormGroup>
                 <Button
                   variant="contained"
                   sx={{
@@ -125,7 +64,7 @@ const LoginScreen = ({ onLogin, messageError }) => {
                   }}
                   onClick={handleSubmit}
                 >
-                  Login
+                  Send
                 </Button>
                 <WebText textAlign={"center"}>
                   This form is protected by hCaptcha and its
@@ -144,14 +83,9 @@ const LoginScreen = ({ onLogin, messageError }) => {
             )}
           </Formik>
         </CardShadow>
-        <Link to="/auth/forgot-password" style={{ textDecoration: "none" }}>
-          <WebText fontSize={18} color={COLOR.BLUE_0}>
-            Forgot password ?
-          </WebText>
-        </Link>
       </BoxForm>
     </Container>
   );
 };
 
-export default LoginScreen;
+export default ForgotPasswordScreen;
