@@ -51,7 +51,6 @@ const LoginSocial = () => {
 				});
 			})
 			.catch(error => {
-				console.log(">>> error", error);
 				const errorMessage = error.message.split("/")[1].split(")")[0];
 				setDataError(errorMessage);
 			});

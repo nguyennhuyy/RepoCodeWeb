@@ -36,6 +36,7 @@ const UploadView = () => {
 			setImageOrigin("");
 		}
 	};
+
 	const callbackSetActiveAlert = data => {
 		if (data) {
 			setActiveAlert(false);
