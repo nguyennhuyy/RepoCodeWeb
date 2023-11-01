@@ -1,11 +1,8 @@
 import axios from "axios";
 const REQUEST_TIMEOUT = 20000;
 const URL_API = process.env.REACT_APP_CURRENT_API;
-let getToken = JSON.parse(localStorage.getItem("persist:auth"));
-let tokens = getToken && JSON.parse(getToken?.token);
 
 export default class APIUtils {
-	accessToken = tokens || "";
 	currentLanguage = "";
 	static setAccessToken(token) {
 		this.accessToken = `${token}`;
@@ -20,13 +17,16 @@ export default class APIUtils {
 
 	static get(path, params) {
 		return new Promise(async (resolve, reject) => {
+			let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+			let token = getToken && JSON.parse(getToken?.token);
+
 			let request = {
 				url: `${URL_API}/${path}`,
 				method: "GET",
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					authorization: `Bearer ${this.accessToken || tokens || ""} `,
+					authorization: `Bearer ${token || ""} `,
 					"Access-Control-Allow-Origin": "*",
 					"Access-Control-Allow-Credentials": true,
 					"Access-Control-Allow-Methods":
@@ -52,13 +52,15 @@ export default class APIUtils {
 
 	static post(path, postData, headers) {
 		return new Promise(async (resolve, reject) => {
+			let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+			let token = getToken && JSON.parse(getToken?.token);
 			let request = {
 				url: `${URL_API}/${path}`,
 				method: "POST",
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					authorization: `Bearer ${this.accessToken || tokens || ""}`,
+					authorization: `Bearer ${token || ""}`,
 					"Access-Control-Allow-Origin": "*",
 					"Access-Control-Allow-Credentials": true,
 					"Access-Control-Allow-Methods":
@@ -85,13 +87,15 @@ export default class APIUtils {
 
 	static put(path, postData, headers) {
 		return new Promise(async (resolve, reject) => {
+			let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+			let token = getToken && JSON.parse(getToken?.token);
 			let request = {
 				url: `${URL_API}/${path}`,
 				method: "PUT",
 				timeout: REQUEST_TIMEOUT,
 				headers: {
 					"Content-Type": "application/json",
-					authorization: `Bearer ${this.accessToken || tokens || ""}`,
+					authorization: `Bearer ${token || ""}`,
 					"Access-Control-Allow-Origin": "*",
 					"Access-Control-Allow-Credentials": true,
 					"Access-Control-Allow-Methods":
@@ -118,12 +122,15 @@ export default class APIUtils {
 	static uploadFile(path, file, name, headers) {
 		var fd = new FormData();
 		fd.append(name, file);
+		let getToken = JSON.parse(localStorage.getItem("persist:auth"));
+		let token = getToken && JSON.parse(getToken?.token);
+
 		return new Promise((resolve, reject) =>
 			axios
 				.post(`${URL_API}/${path}`, fd, {
 					headers: {
 						"Content-Type": "multipart/form-data",
-						authorization: `Bearer ${this.accessToken || tokens || ""}`,
+						authorization: `Bearer ${token || ""}`,
 						"content-length": 99999999
 					},
 					maxBodyLength: Infinity,
